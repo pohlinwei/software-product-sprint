@@ -28,12 +28,34 @@ const hideMenuShowMain = () => {
   }
 }
 
- /**
-  * ADD EVENT LISTENERS
-  */
+/* HOME */
+const actions = document.getElementsByClassName('action');
+// indicates the action which is currently shown
+let currAction = 0;
+// animates actions by displaying them like a slideshow
+const actionsAnimate = () => {
+  const nextAction = (currAction + 1) % actions.length;
+  // make current invisible
+  actions[currAction].style.display = 'none';
+  // show next
+  actions[nextAction].style.display = 'inline';
+  currAction = nextAction;
+}
+
+/**
+ * LOADING/SETUP DYNAMIC ELEMENTS
+ */
+/* HOME */
+// animate action verbs
+window.setInterval(actionsAnimate, 2000);
+
+/**
+ * ADD EVENT LISTENERS
+ */
 
 /* NAV */
 const menuIcon = document.getElementById('menu-icon');
+/* TODO: refactor */
 // hide main view elements and display dropdown menu
 menuIcon.onclick = () => {
   for (let mainView of mainViews) {
