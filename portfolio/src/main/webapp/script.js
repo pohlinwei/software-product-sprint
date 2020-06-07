@@ -12,17 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
+/** 
+ * FUNCTIONS 
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+/* NAV */
+const mainViews = document.getElementsByClassName('main-view');
+const dropdownMenu = document.getElementById('dropdown-menu');
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+// hide dropdown menu and show main view elements
+const hideMenuShowMain = () => {
+  dropdownMenu.style.display = 'none';
+  for (let mainView of mainViews) {
+    mainView.style.display = 'flex';
+  }
+}
+
+ /**
+  * ADD EVENT LISTENERS
+  */
+
+/* NAV */
+const menuIcon = document.getElementById('menu-icon');
+// hide main view elements and display dropdown menu
+menuIcon.onclick = () => {
+  for (let mainView of mainViews) {
+   mainView.style.display = 'none';
+  }
+  dropdownMenu.style.display = 'block';
+}
+
+const closeButton = document.getElementById('close-button');
+// hide dropdown menu and show main view
+closeButton.onclick = hideMenuShowMain;
+
+const dropdownMenuContent = document.getElementById('dropdown-menu-content').children;
+for (let dropdownElement of dropdownMenuContent) {
+  // hide dropdown menu and redirect user to relevant section
+  dropdownElement.onclick = hideMenuShowMain;
 }
