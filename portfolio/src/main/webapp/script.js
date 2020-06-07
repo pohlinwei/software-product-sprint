@@ -54,7 +54,6 @@ const hideMainShowMenu = () => {
     mainView.style.display = 'none';
   }
   dropdownMenu.style.display = 'block';
-}
 
 /**
  * Adds listener to dropdown menu, elements that belong to main view 
