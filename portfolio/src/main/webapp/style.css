@@ -24,8 +24,8 @@ nav {
   flex: 1;
   color: #fff;
   /*border: 1px solid orange;*/
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1.5em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.4em;
 }
 
 a {
@@ -40,21 +40,43 @@ a:hover {
 #icon-placeholder {
   /* takes up 1/2 of nav */
   flex: 1;
-}
-
-@media screen and (max-width: 600px) and (min-width: 500px) {
-  #nav-content {
-    /* takes up 2/3 of nav when screen width is within specified size*/
-    flex: 2;
-  }
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: right;
 }
 
 #icon-placeholder > div {
   height: 80%;
   width: 20px;
   background-color: #fff;
-  float: right;
 }
 
+#menu {
+  /* hide menu by default */
+  visibility: hidden;
+  color: #fff;
+  align-self: center;
+}
 
+/* Makes nav bar responsive */
+@media screen and (max-width: 600px) and (min-width: 500px) {
+  nav {
+    padding: 10px 20px;
+  }
+  #nav-content {
+    /* takes up 2/3 of nav when screen width is within specified size*/
+    flex: 2;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  /* show menu bar instead of nav content, if screen is small */
+  #menu {
+    visibility: visible;
+  }
+  #nav-content {
+    visibility: hidden;
+  }
+}
 
