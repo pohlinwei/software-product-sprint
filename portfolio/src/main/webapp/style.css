@@ -93,7 +93,7 @@ a:hover {
   background-repeat: no-repeat;
 }
 
-#icon {
+#logo {
   height: 5vw;
   width: 5vw;
   background-image: url("vectors/icon.svg");
@@ -111,7 +111,7 @@ a:hover {
     /* takes up 2/3 of nav when screen width is within specified size*/
     flex: 2;
   }
-  #icon {
+  #logo {
     height: 6vw;
     width: 6vw;
   }
@@ -129,7 +129,7 @@ a:hover {
     display: none;
   }
   /* make icon smaller */
-  #icon {
+  #logo {
     height: 7vh;
     width: 7vh;
   }
