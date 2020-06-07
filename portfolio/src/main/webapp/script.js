@@ -28,6 +28,14 @@ const hideMenuShowMain = () => {
   }
 }
 
+// hide main view elements and display dropdown menu
+const hideMainShowMenu = () => {
+  for (let mainView of mainViews) {
+   mainView.style.display = 'none';
+  }
+  dropdownMenu.style.display = 'block';
+}
+
 /* HOME */
 const actions = document.getElementsByClassName('action');
 // indicates the action which is currently shown
@@ -55,17 +63,9 @@ window.setInterval(actionsAnimate, 2000);
 
 /* NAV */
 const menuIcon = document.getElementById('menu-icon');
-/* TODO: refactor */
-// hide main view elements and display dropdown menu
-menuIcon.onclick = () => {
-  for (let mainView of mainViews) {
-   mainView.style.display = 'none';
-  }
-  dropdownMenu.style.display = 'block';
-}
+menuIcon.onclick = hideMainShowMenu;
 
 const closeButton = document.getElementById('close-button');
-// hide dropdown menu and show main view
 closeButton.onclick = hideMenuShowMain;
 
 const dropdownMenuContent = document.getElementById('dropdown-menu-content').children;
