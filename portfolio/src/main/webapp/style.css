@@ -243,3 +243,16 @@ a:hover {
     width: 10vh;
   }
 }
+
+/* FOOTER */
+footer {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer > p {
+  flex: 1;
+}
