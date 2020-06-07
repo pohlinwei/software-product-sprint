@@ -37,7 +37,7 @@ a:hover {
   font-style: italic;
 }
 
-#icon-placeholder {
+#logo-placeholder {
   /* takes up 1/2 of nav */
   flex: 1;
   display: flex;
@@ -46,7 +46,7 @@ a:hover {
   justify-content: right;
 }
 
-#icon-placeholder > div {
+#logo-placeholder > div {
   height: 80%;
   width: 20px;
   background-color: #fff;
