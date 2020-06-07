@@ -178,7 +178,7 @@ a:hover {
   line-height: 20px;
 }
 
-@media screen and (min-height: 750px) {
+@media screen and (min-height: 750px) and (min-width: 500px) {
   /* make font size bigger when screen is bigger*/
   #greeting {
     font-size: 7em;
