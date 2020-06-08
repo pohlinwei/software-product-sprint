@@ -12,15 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** 
- * FUNCTIONS 
+/**
+ * Ensures that the stated elements are present. Note that elements maybe an
+ * HTMLCollection, NodeList or an HTML element. Hence, the stated elements are considered
+ * to be present if all HTMLCollection and NodeList have length > 0 and all HTML elements
+ * are non-null.
+ * @param {...(NodeList | HTMLCollection | HTML element)} elements Elements to be checked.
+ * @throws Will throw if one of the elements is deemed to be not present
  */
+function ensureNonNull(... elements) {
+  for (element of elements) {
+    isEmpty = (element instanceof HTMLCollection || element instanceof NodeList) &&
+      element.length === 0;
+    isNull = element === null;
 
-/* NAV */
+    if (isEmpty || isNull) {
+      throw new Error("Missing desired element");
+    }
+  }
+}
+
 const mainViews = document.getElementsByClassName('main-view');
 const dropdownMenu = document.getElementById('dropdown-menu');
+try {
+  ensureNonNull(mainViews, dropdownMenu);
+} catch (err) {
+  console.error(err);
+}
 
-// hide dropdown menu and show main view elements
+// Hides dropdown menu and shows main view elements.
 const hideMenuShowMain = () => {
   dropdownMenu.style.display = 'none';
   for (let mainView of mainViews) {
@@ -28,26 +48,50 @@ const hideMenuShowMain = () => {
   }
 }
 
- /**
-  * ADD EVENT LISTENERS
-  */
-
-/* NAV */
-const menuIcon = document.getElementById('menu-icon');
-// hide main view elements and display dropdown menu
-menuIcon.onclick = () => {
+// Hides main view elements and shows dropdown menu.
+const hideMainShowMenu = () => {
   for (let mainView of mainViews) {
-   mainView.style.display = 'none';
+    mainView.style.display = 'none';
   }
   dropdownMenu.style.display = 'block';
 }
 
-const closeButton = document.getElementById('close-button');
-// hide dropdown menu and show main view
-closeButton.onclick = hideMenuShowMain;
+/**
+ * Adds listener to dropdown menu, elements that belong to main view 
+ * and elements in the dropdown menu to enable the user to toggle between them. 
+ * To view the dropdown menu, the user has to click on the menu icon.
+ * To view the main view after opening the dropdown, the user has to click close
+ * or select an element in the dropdown menu.
+ */
+const setupToggleMainAndMenu = () => {
+  const closeButton = document.getElementById('close-button');
+  try {
+    ensureNonNull(closeButton);
+  } catch(err) {
+    console.error(err);
+  }
+  closeButton.onclick = hideMenuShowMain;
 
-const dropdownMenuContent = document.getElementById('dropdown-menu-content').children;
-for (let dropdownElement of dropdownMenuContent) {
-  // hide dropdown menu and redirect user to relevant section
-  dropdownElement.onclick = hideMenuShowMain;
+  const menuIcon = document.getElementById('menu-icon');
+  try {
+    ensureNonNull(menuIcon);
+  } catch (err) {
+    console.error(err);
+  }
+  menuIcon.onclick = hideMainShowMenu;
+
+  const dropdownMenuContent = document.getElementById('dropdown-menu-content');
+  try {
+    ensureNonNull(dropdownMenuContent);
+  } catch (err) {
+    console.error(err);
+  }
+  
+  const dropdownElements = dropdownMenuContent.children;
+  for (let dropdownElement of dropdownElements) {
+    // hides dropdown menu and redirects user to relevant section
+    dropdownElement.onclick = hideMenuShowMain;
+  }
 }
+
+setupToggleMainAndMenu();
