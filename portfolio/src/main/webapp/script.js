@@ -96,22 +96,24 @@ const setupToggleMainAndMenu = () => {
 
 setupToggleMainAndMenu();
 
-const actions = document.getElementsByClassName('action');
-// indicates the action which is currently shown
-let currAction = 0;
-// animates actions by displaying them like a slideshow
-const actionsAnimate = () => {
-  const nextAction = (currAction + 1) % actions.length;
-  // make current invisible
-  actions[currAction].style.display = 'none';
-  // show next
-  actions[nextAction].style.display = 'inline';
-  currAction = nextAction;
+/**
+ * Sets up animation of actions by displaying them like a slideshow.
+ * Specifically, we make the current action invisible and the next action
+ * visible after every 2s.
+ */
+const setupActionAnimation = () => {
+  const actions = document.getElementsByClassName('action');
+  ensureNonNull(actions);
+  let currAction = 0; // indicates the action which is currently shown
+  const actionsAnimate = () => {
+    const nextAction = (currAction + 1) % actions.length;
+    actions[currAction].style.display = 'none';
+    actions[nextAction].style.display = 'inline';
+    currAction = nextAction;
+  }
+  
+  window.setInterval(actionsAnimate, 2000);
 }
 
-/**
- * LOADING/SETUP DYNAMIC ELEMENTS
- */
-/* HOME */
-// animate action verbs
-window.setInterval(actionsAnimate, 2000);
+setupActionAnimation();
+
