@@ -4,9 +4,19 @@ body {
   margin: 0px;
 }
 
+.main-view {
+  display: flex;
+}
+
+section {
+  width: 90vw;
+  height: 90vh;
+  flex-direction: column;
+  padding: 5vh 5vw;
+}
+
 /* NAV */
 nav {
-  display: flex;
   background-color: #000;
   padding: 15px 3em;
 }
@@ -133,5 +143,81 @@ a:hover {
   #logo {
     height: 7vh;
     width: 7vh;
+  }
+}
+
+/* HOME */
+#home {
+  margin-top: -75px;
+  background-color: #000;
+  color: #fff;
+  justify-content: center;
+}
+
+#home-placeholder {
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#home-placeholder > * {
+  padding-left: 15px;
+}
+
+#greeting {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  font-size: 4em;
+  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+}
+
+#home-description {
+  flex: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+  line-height: 20px;
+}
+
+@media screen and (min-height: 750px) and (min-width: 500px) {
+  /* make font size bigger when screen is bigger*/
+  #greeting {
+    font-size: 7em;
+  }
+  #home-description {
+    font-size: 3em;
+    line-height: normal;
+  }
+}
+
+.action {
+  font-weight: bold;
+  /* hide them on loading (to be displayed using .js) */
+  display: none;
+  transition: display 0.2s;
+  text-decoration: underline;
+}
+
+#arrow-placeholder {
+  height: 15vh;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+
+#arrow {
+  height: 15vh;
+  width: 10vh;
+  background-image: url("vectors/arrow.svg");
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-height: 550px) {
+  #arrow-placeholder {
+    margin-top: 10vh;
+    height: 15vh;
+  }
+  #arrow {
+    width: 10vh;
   }
 }
