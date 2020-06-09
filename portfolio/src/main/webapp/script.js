@@ -80,7 +80,7 @@ const setupToggleMainAndMenu = () => {
   }
   menuIcon.onclick = hideMainShowMenu;
 
-  const dropdownMenuContent = document.getElementById('dropdown-menu-content');
+const dropdownMenuContent = document.getElementById('dropdown-menu-content');
   try {
     ensureNonNull(dropdownMenuContent);
   } catch (err) {
