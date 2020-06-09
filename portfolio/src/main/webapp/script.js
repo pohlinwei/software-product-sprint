@@ -105,14 +105,14 @@ const setupActionAnimation = () => {
   const actions = document.getElementsByClassName('action');
   ensureNonNull(actions);
   let currAction = 0; // indicates the action which is currently shown
-  const actionsAnimate = () => {
+  const animateActions = () => {
     const nextAction = (currAction + 1) % actions.length;
     actions[currAction].style.display = 'none';
     actions[nextAction].style.display = 'inline';
     currAction = nextAction;
   }
   
-  window.setInterval(actionsAnimate, 2000);
+  window.setInterval(animateActions, 2000);
 }
 
 setupActionAnimation();
