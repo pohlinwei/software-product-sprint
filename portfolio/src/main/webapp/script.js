@@ -67,7 +67,7 @@ const setupToggleMainAndMenu = () => {
   const closeButton = document.getElementById('close-button');
   try {
     ensureNonNull(closeButton);
-  } catch(err) {
+  } catch (err) {
     console.error(err);
   }
   closeButton.onclick = hideMenuShowMain;
@@ -103,7 +103,11 @@ setupToggleMainAndMenu();
  */
 const setupActionAnimation = () => {
   const actions = document.getElementsByClassName('action');
-  ensureNonNull(actions);
+  try {
+    ensureNonNull(actions);
+  } catch (err) {
+    console.error(err);
+  }
   let currAction = 0; // indicates the action which is currently shown
   const actionsAnimate = () => {
     const nextAction = (currAction + 1) % actions.length;
@@ -117,3 +121,20 @@ const setupActionAnimation = () => {
 
 setupActionAnimation();
 
+/**
+ * Fetches response from the server and displays it under 'Contact' section.
+ */
+const fetchAndShowResponse = () => {
+  const commentPlaceholder = document.getElementById('comment-placeholder');
+  try {
+    ensureNonNull(commentPlaceholder);
+  } catch (err) {
+    console.log(error);
+  }
+  fetch('/data').then(response => response.text()).then(comment => {
+    commentPlaceholder.innerHTML = comment;
+  })
+}
+
+const body = document.getElementsByTagName('body')[0];
+body.onload = fetchAndShowResponse;
