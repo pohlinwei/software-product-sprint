@@ -134,7 +134,7 @@ const fetchAndShowResponse = () => {
   fetch('/data').then(response => response.text()).then(strings => {
     // commentPlaceholder.innerHTML = comment;
     console.log(strings);
-  })
+  });
 }
 
 const body = document.getElementsByTagName('body')[0];
