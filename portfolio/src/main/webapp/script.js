@@ -131,8 +131,9 @@ const fetchAndShowResponse = () => {
   } catch (err) {
     console.log(error);
   }
-  fetch('/data').then(response => response.text()).then(comment => {
-    commentPlaceholder.innerHTML = comment;
+  fetch('/data').then(response => response.text()).then(strings => {
+    // commentPlaceholder.innerHTML = comment;
+    console.log(strings);
   })
 }
 
