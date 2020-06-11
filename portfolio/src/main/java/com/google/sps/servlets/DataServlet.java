@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns a sample list of strings. */
-@WebServlet("/data")
+@WebServlet("/sample_strings")
 public class DataServlet extends HttpServlet {
 
   @Override
