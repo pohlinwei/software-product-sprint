@@ -23,19 +23,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns a sample list of strings. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Strings to be shown
-    List<String> strings = Arrays.asList("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ", 
+    List<String> stringsToShow = Arrays.asList("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ", 
       "Cras id turpis et nulla semper laoreet. ", 
       "Nullam gravida consequat risus. ");
 
-    // Convert strings to json
-    String json = (new Gson()).toJson(strings);
+    String json = (new Gson()).toJson(stringsToShow);
 
     response.setContentType("application/json;");
     response.getWriter().println(json);
