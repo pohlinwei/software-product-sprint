@@ -131,9 +131,9 @@ const fetchAndShowResponse = () => {
   } catch (err) {
     console.log(error);
   }
-  fetch('/data').then(response => response.text()).then(comment => {
-    commentPlaceholder.innerHTML = comment;
-  })
+  fetch('/sample_strings').then(response => response.json()).then(responseStrings => {
+    commentPlaceholder.innerHTML = responseStrings;
+  });
 }
 
 const body = document.getElementsByTagName('body')[0];
