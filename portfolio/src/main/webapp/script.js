@@ -131,7 +131,7 @@ const fetchAndShowResponse = () => {
   } catch (err) {
     console.log(error);
   }
-  fetch('/submit_comment').then(response => response.json()).then(comments => {
+  fetch('/comment').then(response => response.json()).then(comments => {
     comments.forEach(commentText => {
       commentPlaceholder.appendChild(createCommentElement(commentText))
     });

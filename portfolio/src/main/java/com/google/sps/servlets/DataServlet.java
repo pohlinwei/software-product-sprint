@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that receives user's comment (if any) and returns all users' comments for that session. */
-@WebServlet("/submit_comment")
+@WebServlet("/comment")
 public class DataServlet extends HttpServlet {
   private final List<String> comments = new ArrayList<>();
   private Gson gson = new Gson();
