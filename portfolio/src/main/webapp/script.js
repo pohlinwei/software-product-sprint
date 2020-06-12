@@ -132,9 +132,17 @@ const fetchAndShowResponse = () => {
     console.log(error);
   }
   fetch('/submit_comment').then(response => response.json()).then(comments => {
-    console.log(comments);
-    commentPlaceholder.innerHTML = responseStrings;
+    comments.forEach(commentText => {
+      commentPlaceholder.appendChild(createCommentElement(commentText))
+    });
   });
+}
+
+/** Creates an element which contains the comment text. */
+const createCommentElement = (commentText) => {
+  const comment = document.createElement('li');
+  comment.innerHTML = commentText;
+  return comment;
 }
 
 const body = document.getElementsByTagName('body')[0];
