@@ -24,10 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that receives user's comment (if any) and returns all users' comments for that session. */
+// TODO: change class name, abstract comment to a class on its own and separate 'post' and 'get' servlets
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
   private final List<String> comments = new ArrayList<>();
-  private Gson gson = new Gson();
+  private final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -36,7 +37,7 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  @Override
+  @Override 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = getParameter(request, "comment", "");
     comments.add(comment);
