@@ -15,7 +15,7 @@
 package com.google.sps.servlets;
 
 import com.google.gson.Gson;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -23,19 +23,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns a sample list of strings. */
-@WebServlet("/sample_strings")
+/** Servlet that receives user's comment (if any) and returns all users' comments for that session. */
+@WebServlet("/submit_comment")
 public class DataServlet extends HttpServlet {
+  private List<String> comments = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    List<String> stringsToShow = Arrays.asList("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ", 
-      "Cras id turpis et nulla semper laoreet. ", 
-      "Nullam gravida consequat risus. ");
-
-    String json = (new Gson()).toJson(stringsToShow);
-
+    String[] commentArr = comments.stream().toArray(String[]::new);
+    String json = (new Gson()).toJson(commentArr);
     response.setContentType("application/json;");
     response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment = getParameter(request, "comment", "");
+    comments.add(comment);
+    response.sendRedirect("#contact");
+  }
+
+  /**
+   * Requests user-input value for the specified parameter, 
+   * and returns the default value if the user-input value is null.
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }
