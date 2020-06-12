@@ -26,12 +26,12 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that receives user's comment (if any) and returns all users' comments for that session. */
 @WebServlet("/submit_comment")
 public class DataServlet extends HttpServlet {
-  private List<String> comments = new ArrayList<>();
+  private final List<String> comments = new ArrayList<>();
+  private Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String[] commentArr = comments.stream().toArray(String[]::new);
-    String json = (new Gson()).toJson(commentArr);
+    String json = gson.toJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
