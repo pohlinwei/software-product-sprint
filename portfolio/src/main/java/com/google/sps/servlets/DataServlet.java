@@ -40,7 +40,7 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = getParameter(request, "comment", "");
     comments.add(comment);
-    response.sendRedirect("#contact");
+    response.sendRedirect("/index.html#contact");
   }
 
   /**
