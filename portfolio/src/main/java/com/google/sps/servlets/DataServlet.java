@@ -39,6 +39,7 @@ public class DataServlet extends HttpServlet {
 
   @Override 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // TODO: Add validation
     String comment = getParameter(request, "comment", "");
     comments.add(comment);
     response.sendRedirect("/index.html#contact");
