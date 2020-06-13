@@ -131,9 +131,18 @@ const fetchAndShowResponse = () => {
   } catch (err) {
     console.log(error);
   }
-  fetch('/sample_strings').then(response => response.json()).then(responseStrings => {
-    commentPlaceholder.innerHTML = responseStrings;
+  fetch('/comment').then(response => response.json()).then(comments => {
+    comments.forEach(commentText => {
+      commentPlaceholder.appendChild(createCommentElement(commentText))
+    });
   });
+}
+
+/** Creates an element which contains the comment text. */
+const createCommentElement = (commentText) => {
+  const comment = document.createElement('li');
+  comment.innerHTML = commentText;
+  return comment;
 }
 
 const body = document.getElementsByTagName('body')[0];

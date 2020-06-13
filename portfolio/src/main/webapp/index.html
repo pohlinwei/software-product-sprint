@@ -86,7 +86,13 @@
         <h1>Contact</h1>
       </div>
       <div>
-        <p id="comment-placeholder">Drop a comment here to say hi!</p>
+        <form action="/comment" method="post">
+          <label for="comment">Comment:</label>
+          <input type="text" name="comment"/>
+          <input type="submit" value="Submit"/>
+        </form>
+        <h2>Comments: </h2>
+        <ul id="comment-placeholder"></ul>
       </div>
       <!--TODO: add comment section here (in week 2)-->
     </section>
