@@ -31,13 +31,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that receives user's comment (if any) and returns all users' comments for that session. */
 // TODO: change class name, abstract comment to a class on its own and separate 'post' and 'get' servlets
-@WebServlet("/submit_comment")
+@WebServlet("/comment")
 public class DataServlet extends HttpServlet {
+  private final Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+  private final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
-
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -45,8 +45,7 @@ public class DataServlet extends HttpServlet {
     for (Entity commentEntity : results.asIterable()) {
       comments.add((String) commentEntity.getProperty("comment"));
     }
-    String[] commentArr = comments.stream().toArray(String[]::new);
-    String json = (new Gson()).toJson(commentArr);
+    String json = gson.toJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
