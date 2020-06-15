@@ -33,12 +33,13 @@ import javax.servlet.http.HttpServletResponse;
 // TODO: change class name, abstract comment to a class on its own and separate 'post' and 'get' servlets
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
-  private final Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
   private final Gson gson = new Gson();
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
     PreparedQuery results = datastore.prepare(query);
 
     List<String> comments = new ArrayList<>();
@@ -61,7 +62,6 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty("comment", comment);
     commentEntity.setProperty("timestamp", timestamp);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     response.sendRedirect("/index.html#contact");
