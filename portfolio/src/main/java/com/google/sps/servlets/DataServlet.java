@@ -33,8 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 // TODO: change class name, abstract comment to a class on its own and separate 'post' and 'get' servlets
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
-  private final Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
   private final Gson gson = new Gson();
+  private Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
