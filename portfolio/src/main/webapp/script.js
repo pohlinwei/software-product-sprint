@@ -32,40 +32,25 @@ function ensureNonNull(... elements) {
   }
 }
 
-/** Ensures that the element has the stated class. */
-function ensureHasClass(element, statedClass) {
-  if (!element.classList.contains(statedClass)) {
-    throw new Error(`Element does not have ${statedClass} class`);
+const showMainView = (isMainViewShown) => {
+  const mainViews = document.getElementsByClassName('main-view');
+  const dropdownMenu = document.getElementById('dropdown-menu');
+  try {
+    ensureNonNull(mainViews, dropdownMenu);
+  } catch (err) {
+    console.error(err);
   }
-}
 
-const mainViews = document.getElementsByClassName('main-view');
-const dropdownMenu = document.getElementById('dropdown-menu');
-try {
-  ensureNonNull(mainViews, dropdownMenu);
-} catch (err) {
-  console.error(err);
-}
-
-// Hides dropdown menu and shows main view elements.
-const hideMenuShowMain = () => {
-  ensureHasClass(dropdownMenu, 'show');
-  dropdownMenu.classList.remove('show');
-  dropdownMenu.classList.add('hide');
-
-  for (let mainView of mainViews) {
-    mainView.style.display = 'flex';
-  }
-}
-
-// Hides main view elements and shows dropdown menu.
-const hideMainShowMenu = () => {
-  ensureHasClass(dropdownMenu, 'hide');
-  dropdownMenu.classList.remove('hide');
-  dropdownMenu.classList.add('show');
-  
-  for (let mainView of mainViews) {
-    mainView.style.display = 'none';
+  if (isMainViewShown) {
+    dropdownMenu.classList.replace('show', 'hide');
+    for (let mainView of mainViews) {
+      mainView.style.display = 'flex';
+    }
+  } else {
+    dropdownMenu.classList.replace('hide', 'show');
+    for (let mainView of mainViews) {
+      mainView.style.display = 'none';
+    }
   }
 }
 
@@ -83,7 +68,7 @@ const setupToggleMainAndMenu = () => {
   } catch (err) {
     console.error(err);
   }
-  closeButton.onclick = hideMenuShowMain;
+  closeButton.onclick = () => showMainView(true);
 
   const menuIcon = document.getElementById('menu-icon');
   try {
@@ -91,7 +76,7 @@ const setupToggleMainAndMenu = () => {
   } catch (err) {
     console.error(err);
   }
-  menuIcon.onclick = hideMainShowMenu;
+  menuIcon.onclick = () => showMainView(false);
 
   const dropdownMenuContent = document.getElementById('dropdown-menu-content');
   try {
