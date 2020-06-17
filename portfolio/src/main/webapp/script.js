@@ -32,7 +32,11 @@ function ensureNonNull(... elements) {
   }
 }
 
-const showMainView = (isMainViewShown) => {
+/** 
+ * Shows or hides main view.
+ * @param {boolean} shouldShow if true, main view will be shown; otherwise, it will be hidden
+ */
+const showMainView = (shouldShow) => {
   const mainViews = document.getElementsByClassName('main-view');
   const dropdownMenu = document.getElementById('dropdown-menu');
   try {
@@ -41,16 +45,16 @@ const showMainView = (isMainViewShown) => {
     console.error(err);
   }
 
+  const mainViewDisplay = shouldShow ? 'flex' : 'none';
+
+  for (let mainView of mainViews) {
+    mainView.style.display = mainViewDisplay;
+  }
+
   if (isMainViewShown) {
-    dropdownMenu.classList.replace('show', 'hide');
-    for (let mainView of mainViews) {
-      mainView.style.display = 'flex';
-    }
+    dropdownMenu.classList.replace('show', 'hide');   
   } else {
     dropdownMenu.classList.replace('hide', 'show');
-    for (let mainView of mainViews) {
-      mainView.style.display = 'none';
-    }
   }
 }
 
