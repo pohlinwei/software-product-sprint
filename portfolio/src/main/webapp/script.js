@@ -92,7 +92,7 @@ const setupToggleMainAndMenu = () => {
   const dropdownElements = dropdownMenuContent.children;
   for (let dropdownElement of dropdownElements) {
     // hides dropdown menu and redirects user to relevant section
-    dropdownElement.onclick = hideMenuShowMain;
+    dropdownElement.onclick = () => showMainView(true);
   }
 }
 
