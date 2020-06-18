@@ -27,33 +27,35 @@ function ensureNonNull(... elements) {
     isNull = element === null;
 
     if (isEmpty || isNull) {
-      throw new Error("Missing desired element");
+      throw new Error('Missing desired element');
     }
   }
 }
 
-const mainViews = document.getElementsByClassName('main-view');
-const dropdownMenu = document.getElementById('dropdown-menu');
-try {
-  ensureNonNull(mainViews, dropdownMenu);
-} catch (err) {
-  console.error(err);
-}
-
-// Hides dropdown menu and shows main view elements.
-const hideMenuShowMain = () => {
-  dropdownMenu.style.display = 'none';
-  for (let mainView of mainViews) {
-    mainView.style.display = 'flex';
+/** 
+ * Shows or hides main view.
+ * @param {boolean} shouldShow if true, main view will be shown; otherwise, it will be hidden
+ */
+const showMainView = (shouldShow) => {
+  const mainViews = document.getElementsByClassName('main-view');
+  const dropdownMenu = document.getElementById('dropdown-menu');
+  try {
+    ensureNonNull(mainViews, dropdownMenu);
+  } catch (err) {
+    console.error(err);
   }
-}
 
-// Hides main view elements and shows dropdown menu.
-const hideMainShowMenu = () => {
+  const mainViewDisplay = shouldShow ? 'flex' : 'none';
+
   for (let mainView of mainViews) {
-    mainView.style.display = 'none';
+    mainView.style.display = mainViewDisplay;
   }
-  dropdownMenu.style.display = 'block';
+
+  if (showldShow) {
+    dropdownMenu.classList.replace('show', 'hide');   
+  } else {
+    dropdownMenu.classList.replace('hide', 'show');
+  }
 }
 
 /**
@@ -70,7 +72,7 @@ const setupToggleMainAndMenu = () => {
   } catch (err) {
     console.error(err);
   }
-  closeButton.onclick = hideMenuShowMain;
+  closeButton.onclick = () => showMainView(true);
 
   const menuIcon = document.getElementById('menu-icon');
   try {
@@ -78,7 +80,7 @@ const setupToggleMainAndMenu = () => {
   } catch (err) {
     console.error(err);
   }
-  menuIcon.onclick = hideMainShowMenu;
+  menuIcon.onclick = () => showMainView(false);
 
   const dropdownMenuContent = document.getElementById('dropdown-menu-content');
   try {
@@ -90,7 +92,7 @@ const setupToggleMainAndMenu = () => {
   const dropdownElements = dropdownMenuContent.children;
   for (let dropdownElement of dropdownElements) {
     // hides dropdown menu and redirects user to relevant section
-    dropdownElement.onclick = hideMenuShowMain;
+    dropdownElement.onclick = () => showMainView(true);
   }
 }
 

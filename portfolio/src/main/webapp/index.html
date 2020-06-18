@@ -29,7 +29,7 @@
     </nav>
 
     <!--DROPDOWN MENU-->
-    <div id="dropdown-menu">
+    <div id="dropdown-menu" class="hide">
       <div id="close-placeholder">
         <!--CLOSE BUTTON-->
         <div id="close-button" class="button">
@@ -44,7 +44,7 @@
     </div>
 
     <!--HOME-->
-    <section id="home" class="main-view">
+    <section id="home" class="main-view full-width full-height">
       <div id="home-placeholder">
         <h1 id="greeting">Hi there!</h1>
         <div id="home-description">
@@ -62,26 +62,31 @@
     </section>
 
     <!--FEATURED WORKS-->
-    <section id="works" class="main-view">
+    <section id="works" class="main-view full-width full-height">
       <div class="title">
         <h1>Featured Works</h1>
       </div>
       <!--TODO: Add all projects to container-->
-      <div id="projects"/>
+      <div id="projects" class="content">
+        <div class="project">
+          <div class="project-name">Test</div>
+          <div class="project-description">Lorem ipsum.</div>
+        </div>
+      </div>
     </section>
 
     <!--ABOUT ME-->
-    <section id="about" class="main-view">
+    <section id="about" class="main-view full-width full-height">
       <div class="title">
         <h1>About</h1>
       </div>
-      <div>
+      <div class="content">
         <p>Some text about me.</p>
       </div>
     </section>
 
     <!--CONTACT-->
-    <section id="contact" class="main-view">
+    <section id="contact" class="main-view full-width full-height">
       <div class="title">
         <h1>Contact</h1>
       </div>
@@ -98,7 +103,7 @@
     </section>
 
     <!--FOOTER-->
-    <footer class="main-view">
+    <footer class="main-view full-width">
       <p>© Copyright 2020 Poh Lin Wei. All rights reserved.</p>
     </footer>
   </body>
