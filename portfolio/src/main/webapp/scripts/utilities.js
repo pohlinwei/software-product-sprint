@@ -32,10 +32,18 @@ function ensureNonNull(... args) {
     }
 
     if (err !== null) {
+<<<<<<< HEAD
       console.error(`Missing desired element: ${err}`);
       break;
     }
   }
+=======
+      break;
+    }
+  }
+
+  console.assert(err !== null, `Missing desired element: ${err}`);
+>>>>>>> 5bbb7e93d9c61bed62ebf9c1cef03dc30f237652
 }
 
 /** Ensures that the element has the stated class. */
