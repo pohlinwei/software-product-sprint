@@ -4,8 +4,6 @@ const setupComment = () => {
   body.onload = fetchAndShowResponse;
 }
 
-setupComment();
-
 /** Fetches response from the server and displays it under 'Contact' section. */
 const fetchAndShowResponse = () => {
   const commentPlaceholder = document.getElementById('comment-placeholder');
@@ -27,3 +25,5 @@ const createCommentElement = (commentText) => {
   comment.innerHTML = commentText;
   return comment;
 }
+
+setupComment();
