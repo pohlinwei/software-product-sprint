@@ -14,8 +14,8 @@ function ensureNonNull(... args) {
     EMPTY_COLL_OR_LIST: 'Empty HTMLCollection/NodeList',
     EMPTY_ARR: 'Empty array'
   };
+  Object.freeze(ErrorType);
 
-  let hasError = false;
   /** @type {ErrorType} The type of error, if any. */
   let err = null;
 
@@ -31,13 +31,12 @@ function ensureNonNull(... args) {
       err = ErrorType.EMPTY_ARR;
     }
 
-    hasError = err !== null;
-    if (hasError) {
+    if (err !== null) {
       break;
     }
   }
 
-  console.assert(!hasError, `Missing desired element: ${err}`);
+  console.assert(err !== null, `Missing desired element: ${err}`);
 }
 
 /** Ensures that the element has the stated class. */
