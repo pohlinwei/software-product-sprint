@@ -44,3 +44,6 @@ function ensureHasClass(element, statedClass) {
     throw new Error(`Element does not have ${statedClass} class`);
   }
 }
+
+/** Converts seconds to milliseconds. */
+const toMilliseconds = seconds => seconds * 1000;
