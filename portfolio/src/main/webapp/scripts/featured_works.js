@@ -24,7 +24,7 @@ function setupWorkSection(projects_json) {
 /** Creates string which is used to display all projects. */
 function setupProjects(projects_json) {
   const projects = toProjects(projects_json);
-  const projectDivs = projects.map(project => project.div);
+  const projectDivs = projects.map(project => project.toDiv);
   const projectsHtml = projectDivs.map(projectDiv => projectDiv.outerHTML)
                           .join('');
   return projectsHtml;
@@ -35,8 +35,7 @@ function setupProjects(projects_json) {
  * @return {Array<Project>}
  */
 const toProjects = (projects_json) => {
-  const projects = projects_json.map(project_json => toProject(project_json));
-  return projects;
+  return projects_json.map(project_json => toProject(project_json));
 }
 
 /** 
@@ -80,38 +79,37 @@ const displayFirstProj = () => {
 function setupProjectNav() {
   const leftButton = document.getElementById('left-button');
   ensureNonNull(leftButton);
-  leftButton.onclick = () => moveToProj(-1);
+  leftButton.onclick = () => moveToProj(false);
 
   const rightButton = document.getElementById('right-button');
   ensureNonNull(rightButton);
-  rightButton.onclick = () => moveToProj(1);
+  rightButton.onclick = () => moveToProj(true);
 
   const projects = document.getElementsByClassName('project');
   ensureNonNull(projects);
-  /** @type {number} Indicates the index of the project that is currently shown. */
+  // @type {number} Indicates the index of the project that is currently shown.
   let projIndex= 0;
 
   /** 
    * Moves to the next project. If `moveBy` is negative, moves to the previous project;
    * otherwise, if `moveBy` is positive, moves to the next project.
    * 
-   * @param {number} moveBy Indicates the number of projects to move by. Only allows -1 or 1. 
+   * @param {boolean} toLeft If `true`, moves left; otherwise moves right
    */
-  function moveToProj(moveBy) {
-    console.assert(moveBy === -1 || moveBy === 1, 'Invalid moveBy value');
-  
+  function moveToProj(toLeft) { 
     const currProj = projects[projIndex];
+    const moveBy = toLeft ? 1 : -1;
     projIndex = (moveBy + projects.length + projIndex) % projects.length;
     const nextProj = projects[projIndex];
   
-    if (moveBy > 0) {
+    if (toLeft) {
       showNextProj(currProj, nextProj, Slider.LEFT.hide, Slider.LEFT.show);
     } else {
       showNextProj(currProj, nextProj, Slider.RIGHT.hide, Slider.RIGHT.show);
     }
   }
 
-  const ANIMATION_DURATION = 1;
+  const ANIMATION_DURATION_SEC = 1;
   /**
    * Indicates type of animation that is to be applied.
    * @enum {string}
@@ -119,15 +117,16 @@ function setupProjectNav() {
   const Slider = {
     // moves projects leftwards
     LEFT: {
-      hide: `leftout ${ANIMATION_DURATION}s 1`,
-      show: `rightin ${ANIMATION_DURATION}s 1`
+      hide: `leftout ${ANIMATION_DURATION_SEC}s 1`,
+      show: `rightin ${ANIMATION_DURATION_SEC}s 1`
     },
     // moves projects rightwards
     RIGHT: {
-      hide: `rightout ${ANIMATION_DURATION}s 1`,
-      show: `leftin ${ANIMATION_DURATION}s 1`
+      hide: `rightout ${ANIMATION_DURATION_SEC}s 1`,
+      show: `leftin ${ANIMATION_DURATION_SEC}s 1`
     }
   }
+  Object.freeze(Slider);
 
   function showNextProj(currProj, nextProj, animationCurr, animationNext) {
     currProj.style.animation = animationCurr;
@@ -135,7 +134,7 @@ function setupProjectNav() {
       console.log('hi');
       changeDispAndAnimation(currProj, 'none', 'none');
       changeDispAndAnimation(nextProj, 'flex', animationNext);
-    }, toMilliseconds(ANIMATION_DURATION) / 2);
+    }, toMilliseconds(ANIMATION_DURATION_SEC) / 2);
   }
 
   const changeDispAndAnimation = (element, dispVal, animationVal) => {

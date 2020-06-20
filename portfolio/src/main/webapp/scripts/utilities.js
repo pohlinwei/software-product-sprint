@@ -15,7 +15,7 @@ function ensureNonNull(... args) {
     EMPTY_ARR: 'Empty array'
   });
 
-  /** @type {ErrorType} The type of error, if any. */
+  // @type {ErrorType} The type of error, if any.
   let err = null;
 
   for (arg of args) {
