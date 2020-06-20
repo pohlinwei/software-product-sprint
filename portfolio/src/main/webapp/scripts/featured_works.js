@@ -2,15 +2,15 @@ const parentDir = ''; // TODO: add link
 
 fetch(parentDir + 'projects/projects.json')
     .then(response => response.json())
-    .then(projects_json => setupWorkSection(projects_json))
+    .then(projectsJson => setupWorkSection(projectsJson))
     .catch(err => console.error(err));
 
 /** 
  * Sets up featured works section by creating project elements, and
  * left- and right- buttons for navigation.
  */
-function setupWorkSection(projects_json) {
-  const projectsHtml = setupProjects(projects_json);
+function setupWorkSection(projectsJson) {
+  const projectsHtml = setupProjects(projectsJson);
   const worksHtml = addNavButtons(projectsHtml);
 
   const projectsPlaceholder = document.getElementById('projects');
@@ -22,8 +22,8 @@ function setupWorkSection(projects_json) {
 }
 
 /** Creates string which is used to display all projects. */
-function setupProjects(projects_json) {
-  const projects = toProjects(projects_json);
+function setupProjects(projectsJson) {
+  const projects = toProjects(projectsJson);
   const projectDivs = projects.map(project => project.toDiv);
   const projectsHtml = projectDivs.map(projectDiv => projectDiv.outerHTML)
                           .join('');
@@ -34,21 +34,21 @@ function setupProjects(projects_json) {
  * Converts an array of projects that is represented as JSON objects to Projects. 
  * @return {Array<Project>}
  */
-const toProjects = (projects_json) => {
-  return projects_json.map(project_json => toProject(project_json));
+const toProjects = (projectsJson) => {
+  return projectsJson.map(projectJson => toProject(projectJson));
 }
 
 /** 
  * Converts a JSON-represented project to Project. 
  * @return {Project}
  */
-const toProject = (project_json) => {
-  const name = project_json.name;
-  const image = project_json.image;
-  const description = project_json.description;
-  const tools = project_json.tools;
-  const date = project_json.date;
-  const page = project_json.page;
+const toProject = (projectJson) => {
+  const name = projectJson.name;
+  const image = projectJson.image;
+  const description = projectJson.description;
+  const tools = projectJson.tools;
+  const date = projectJson.date;
+  const page = projectJson.page;
   return new Project(name, image, description, tools, date, page);
 }
 
@@ -114,7 +114,7 @@ function setupProjectNav() {
    * Indicates type of animation that is to be applied.
    * @enum {string}
    */
-  const Slider = {
+  const Slider = Object.freeze({
     // moves projects leftwards
     LEFT: {
       hide: `leftout ${ANIMATION_DURATION_SEC}s 1`,
@@ -125,8 +125,7 @@ function setupProjectNav() {
       hide: `rightout ${ANIMATION_DURATION_SEC}s 1`,
       show: `leftin ${ANIMATION_DURATION_SEC}s 1`
     }
-  }
-  Object.freeze(Slider);
+  });
 
   function showNextProj(currProj, nextProj, animationCurr, animationNext) {
     currProj.style.animation = animationCurr;
