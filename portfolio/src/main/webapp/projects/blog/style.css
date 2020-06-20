@@ -1,0 +1,62 @@
+body {
+  padding: 1vh max(2vw, 20px);
+}
+
+.underline {
+  padding: 0px max(2vmin, 20px) 0px max(2vmin, 20px);
+  border-bottom: 2px solid #000;
+  line-height: 1.5rem;
+  width: 10rem;
+  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  text-align: center;
+}
+
+section {
+  margin: 20px auto;
+  min-height: 250px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid #808080;
+  padding: 20px 0px;
+  justify-content: center;
+}
+
+section > img {
+  flex: 1;
+  margin: 10px;
+  max-height: 230px;
+  height: auto;
+  width: auto;
+}
+
+.post-content {
+  flex: 4;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.post-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2.3em;
+}
+
+.post-summary {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.read-btn {
+  font-size: 1em;
+  width: 5em;
+  border: 1px solid #000;
+  background-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
