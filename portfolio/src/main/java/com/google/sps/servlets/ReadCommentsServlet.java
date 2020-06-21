@@ -62,7 +62,8 @@ public class ReadCommentsServlet extends HttpServlet {
     String repliesManagerKeyStr = KeyFactory.keyToString(repliesManagerKey);
     RepliesManager repliesManager = new RepliesManager(repliesManagerKeyStr);
 
-    Query replyQuery = new Query("Reply").setAncestor(repliesManagerKey);
+    Query replyQuery = new Query("Reply").setAncestor(repliesManagerKey)
+      .addSort("timestamp", SortDirection.ASCENDING);
     Iterable<Entity> replyEntitiesIterator = datastore.prepare(replyQuery).asIterable();
     
     for (Entity replyEntity : replyEntitiesIterator) {
