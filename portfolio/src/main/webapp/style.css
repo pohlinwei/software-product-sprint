@@ -152,18 +152,17 @@ a:hover {
   cursor: pointer;
 }
 
-/* hide menu by default */
 #dropdown-menu {
   background-color: #000;
 }
 
-.hide {
+.hide-menu {
   height: 0px;
   width: 0px;
   overflow: hidden;
 }
 
-.show {
+.show-menu {
   min-height: max(calc(var(--min-display-height) / 2), 100vh);
   height: auto;
   width: max(100vw, calc(var(--min-display-width) / 2));
@@ -265,14 +264,14 @@ a:hover {
 #greeting {
   display: flex;
   align-items: center;
-  font-size: 7rem;
+  font-size: 6.5rem;
   font-family: 'Playfair Display', 'Times New Roman', Times, serif;
   margin: 50px 0px max(5%, 20px) 0px;
 }
 
 #home-description {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
 }
 
 .action {
@@ -302,26 +301,124 @@ a:hover {
   display: flex;
 }
 
+#left-button, #right-button {
+  flex: 1;
+  align-self: center;
+  text-align: center;
+}
+
 .project {
+  flex: 20;
+  padding: 20px;
+  /* do not display .project by default */
+  display: none; 
+}
+
+.project-name-placeholder {
+  flex: 1;
+  margin: 1vh 1vw;
+  align-self: center;
+}
+
+.project-image-placeholder {
+  margin: auto;
+  height: max(50vmin, 200px);
+  width: max(50vmin, 200px);
+  border: 1px solid #000;
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
+
+.project-details-placeholder {
+  flex: 1;
+  margin: 3vh 0px;
+  align-self: center;
+}
+
+@media screen and (orientation: portrait) {
+  .project {
+    flex-direction: column;
+    align-self: center;
+    padding: max(20px, 7vw);
+  }
+
+  .project-details-placeholder {
+    align-self: flex-start;
+  }
 }
 
 .project-name {
-  flex: 1;
-  min-width: 200px;
-  min-height: 200px;
-  text-align: center;
-  border: 1px solid #000;
+  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+  font-size: 2rem;
+}
+
+.project-details-placeholder > p {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .project-description {
-  flex: 2;
-  min-width: 200px;
-  min-height: 200px;
-  padding-left: 20px;
+  font-size: 1rem;
 }
+
+.project-tools, .project-date {
+  font-size: 0.6rem;
+}
+
+.more-button {
+  width: 4rem;
+  height: 1.5rem;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.more-button > a {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #fff;
+}
+
+.more-button > a:hover {
+  font-style: normal;
+}
+
+/* PROJECT ANIMATIONS */
+@keyframes rightin {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}  
+
+@keyframes rightout {
+  to {
+    transform: translateX(100%);
+  }
+} 
+
+@keyframes leftin {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes leftout {
+  to {
+    transform: translateX(-100%);
+  }
+} 
 
 /* FOOTER */
 footer {
@@ -331,7 +428,7 @@ footer {
 
 footer > p {
   flex: 1;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }  
-  
