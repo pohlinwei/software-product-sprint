@@ -1,5 +1,5 @@
-/** Enables a form to post request asynchronously.  */
-function enableAsyncForm(form, getInputs, onDataFetched) {
+/** Enables a form to post request.  */
+function enableForm(form, getInputs, onDataFetched) {
   // TODO: ensure that form is not null
   const requestLink = form.getAttribute('action');
   const submissionBtn = form.querySelector('input[type="submit"]');

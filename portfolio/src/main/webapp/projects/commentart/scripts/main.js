@@ -11,7 +11,7 @@ const fetchAndShowComments = () => {
       .then(commentsJson => {
         const comments = commentsJson.map(Comment.toComment(commentJson));
         const commentsManager = new CommentsManager(comments);
-        enableAsyncComment(commentsManager);
+        enableComment(commentsManager);
       });
 }
 

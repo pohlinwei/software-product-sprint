@@ -12,7 +12,9 @@ class ReplyForm {
     formElement.setAttribute('method', 'post');
 
     formElement.innerHTML = this.getFormContent();
-    this.enableAsyncReply(formElement, addReply);
+    this.enableReply(formElement, addReply);
+
+    return formElement;
   }
   
   /** Gets HTML for reply form. */
@@ -22,8 +24,8 @@ class ReplyForm {
         '<input type="text" name="response"/><input type="submit" value="Submit"/>';
   }
 
-  enableAsyncReply(formElement, addReply) {
-    enableAsyncForm(formElement, getInputs, addReply);
+  enableReply(formElement, addReply) {
+    enableForm(formElement, getInputs, addReply);
   }
 
   getInputs() {

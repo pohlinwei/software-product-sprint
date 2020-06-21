@@ -1,4 +1,4 @@
-function enableAsyncComment(commentsManager) {
+function enableComment(commentsManager) {
   const commentForm = document.getElementById('comment-form-placeholder');
   // TODO: ensure that it is not null
   const formElement = commentForm.querySelector('form');
@@ -16,5 +16,5 @@ function enableAsyncComment(commentsManager) {
     return {name: commenterName, message: message};
   }
 
-  enableAsyncForm(formElement, getInputs, commentsManager.addComment);
+  enableForm(formElement, getInputs, commentsManager.addComment);
 }
