@@ -13,7 +13,7 @@ const showMainView = (shouldShow) => {
     mainView.style.display = mainViewDisplay;
   }
 
-  if (showldShow) {
+  if (shouldShow) {
     dropdownMenu.classList.replace('show', 'hide');   
   } else {
     dropdownMenu.classList.replace('hide', 'show');
