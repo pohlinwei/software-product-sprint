@@ -7,6 +7,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 import com.google.sps.commentart.Reply;
+import com.google.sps.commentart.SentimentUtility;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +28,7 @@ public class AddReplyServlet extends HttpServlet {
     String managerKeyStr = getParameter(request, "id", "");
     long timestamp = System.currentTimeMillis();
 
-    // TODO: add sentiment
-    int sentiment = 0;
+    float sentiment = SentimentUtility.getSentiment(responseStr);
 
     Key managerKey = KeyFactory.stringToKey(managerKeyStr);
 

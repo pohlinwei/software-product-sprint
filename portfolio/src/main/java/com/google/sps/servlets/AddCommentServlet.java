@@ -8,6 +8,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 import com.google.sps.commentart.Comment;
 import com.google.sps.commentart.RepliesManager;
+import com.google.sps.commentart.SentimentUtility;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -36,8 +37,7 @@ public class AddCommentServlet extends HttpServlet {
     String repliesManagerEntityKeyStr = KeyFactory.keyToString(repliesManagerEntityKey);
     RepliesManager repliesManager = new RepliesManager(repliesManagerEntityKeyStr);
 
-    // TODO: get sentiment
-    int sentiment = 1;
+    float sentiment = SentimentUtility.getSentiment(commentMsg);
     commentEntity.setProperty("sentiment", sentiment);
 
     datastore.put(commentEntity);
