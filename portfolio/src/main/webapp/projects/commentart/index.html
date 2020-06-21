@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Lin Wei">
+    <meta name="description" content="Lin Wei's portfolio">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CommentArt</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <script src="reply.js" defer></script>
+    <script src="comment.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>CommentArt:</h1>
+      <h2>'Painting' with Comments</h2>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Code</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section id="painting-view">
+        <div id="painting">
+          <h2>Our Art</h2>
+        </div>
+        <h2>Why these colours?</h2>
+        <p>
+          These colours are influenced by the sentiments of the comments and replies posted 
+          <a href="#comments" class="emphasised-link">below</a>. Are you interested in the mechanism of how this works? 
+          Click <a href="#" class="emphasised-link">here</a> to find out more!
+        </p>
+        <h2>Can I interact with it?</h2>
+        <p>
+          Of course! Click on <span class="italicised-text">Our Art</span> above to filter the comments by date.
+          Then, the resulting painting will be restricted to the sentiments of comments from that period of time.
+          Alternatively, if you feel like contributing, leave a comment 
+          <a href="#form-placeholder" class="emphasised-link">below</a>!
+        </p>
+      </section>
+      <section id="comments">
+        <h2>Comments: </h2>
+        <ul id="comments-placeholder">
+          <li>
+            <div class="comment-header">
+              <p><span class="commenter-name">john doe</span> says</p> 
+              <p class="reply-text"><span class="reply-button">reply</span></p>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in nisl sed neque venenatis aliquam. Suspendisse mattis neque a ligula blandit consequat. Etiam in purus vitae nibh sagittis euismod. Donec rutrum dapibus nisi et gravida. Quisque vel convallis lorem, at bibendum dui. Pellentesque dapibus lorem id facilisis cursus. Duis nec auctor orci. Fusce orci mauris, feugiat ut rhoncus ac, lobortis posuere arcu.
+            </p>
+            <button class="view-replies-btn">View Replies <i class="far fa-comments"></i></button>
+            <div class="reply-form">
+              <form action='#' method="post">
+                <label class="form-label" for="responder-name-fill">Name</label>
+                <input type="text" name="responder-name-fill"/>
+                <label class="form-label" for="reply">Reply</label>
+                <input type="text" name="reply"/>
+                <input type="submit" value="Submit"/>
+              </form>
+            </div>
+            <ul class="replies">
+              <!--
+              <li class="reply">
+                <p><span class="responder-name">alice</span>:</p>
+                <div class="response">
+                  <p>Nam consequat ipsum a orci finibus, quis feugiat ligula scelerisque. Donec dui elit, finibus eget 
+          facilisis at, fermentum eu lorem. Nam ac pulvinar nisi. Cras ultricies tristique velit ut pulvinar. 
+          Suspendisse vel elit ac augue rhoncus hendrerit. Curabitur volutpat pulvinar libero, eu fermentum nisi. 
+          Mauris dignissim.</p>
+                </div>
+              </li>
+              <li class="reply">
+                <p><span class="responder-name">alice</span>:</p>
+                <div class="response">
+                  <p>Nam consequat ipsum a orci finibus, quis feugiat ligula scelerisque. Donec dui elit, finibus eget 
+          facilisis at, fermentum eu lorem. Nam ac pulvinar nisi. Cras ultricies tristique velit ut pulvinar. 
+          Suspendisse vel elit ac augue rhoncus hendrerit. Curabitur volutpat pulvinar libero, eu fermentum nisi. 
+          Mauris dignissim.</p>
+                </div>
+              </li>-->
+            </ul>
+          </li>
+        </ul>
+      </li>
+        </ul>
+        <div id="form-placeholder">
+          <p class="form-label">New Comment</p>
+          <textarea name="message" form="user-comments" placeholder="Leave your comment here..."></textarea>
+          <form name="user-comments" action="/comment" method="post"> 
+            <div id="name-placeholder">
+              <label class="form-label" for="commenter-name-fill">Name</label>
+              <input type="text" name="commenter-name-fill" class="commenter-name-fill"/>
+            </div>
+            <div id="submit-placeholder">
+              <input type="submit" value="Submit"/>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
