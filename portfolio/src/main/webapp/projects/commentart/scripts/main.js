@@ -5,7 +5,7 @@ const main = () => {
 }
 
 /** Fetches comments from the server. */
-const fetchAndShowComments= () => {
+const fetchAndShowComments = () => {
   fetch('/read_comments')
       .then(response => response.json())
       .then(commentsJson => {
