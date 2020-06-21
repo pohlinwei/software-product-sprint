@@ -8,15 +8,14 @@ function ensureNonNull(... args) {
    * Indicates error type.
    * @enum {string}
    */
-  const ErrorType = {
+  const ErrorType = Object.freeze({
     NULL_VALUE: 'Null value',
     EMPTY_STR: 'Empty string',
     EMPTY_COLL_OR_LIST: 'Empty HTMLCollection/NodeList',
     EMPTY_ARR: 'Empty array'
-  };
-  Object.freeze(ErrorType);
+  });
 
-  /** @type {ErrorType} The type of error, if any. */
+  // @type {ErrorType} The type of error, if any.
   let err = null;
 
   for (arg of args) {
@@ -33,7 +32,7 @@ function ensureNonNull(... args) {
 
     if (err !== null) {
       console.error(`Missing desired element: ${err}`);
-      break;
+      return;
     }
   }
 }
@@ -44,3 +43,6 @@ function ensureHasClass(element, statedClass) {
     throw new Error(`Element does not have ${statedClass} class`);
   }
 }
+
+/** Converts seconds to milliseconds. */
+const toMilliseconds = seconds => seconds * 1000;
