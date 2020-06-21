@@ -130,7 +130,6 @@ function setupProjectNav() {
   function showNextProj(currProj, nextProj, animationCurr, animationNext) {
     currProj.style.animation = animationCurr;
     setTimeout(() => {
-      console.log('hi');
       changeDispAndAnimation(currProj, 'none', 'none');
       changeDispAndAnimation(nextProj, 'flex', animationNext);
     }, toMilliseconds(ANIMATION_DURATION_SEC) / 2);

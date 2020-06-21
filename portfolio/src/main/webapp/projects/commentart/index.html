@@ -20,8 +20,10 @@
     </header>
     <nav>
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="#">Home</a></li>
+        <!--TODO: add about-->
         <li><a href="">About</a></li>
+        <!--TODO: add link to code-->
         <li><a href="">Code</a></li>
       </ul>
     </nav>
@@ -56,15 +58,15 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in nisl sed neque venenatis aliquam. Suspendisse mattis neque a ligula blandit consequat. Etiam in purus vitae nibh sagittis euismod. Donec rutrum dapibus nisi et gravida. Quisque vel convallis lorem, at bibendum dui. Pellentesque dapibus lorem id facilisis cursus. Duis nec auctor orci. Fusce orci mauris, feugiat ut rhoncus ac, lobortis posuere arcu.
             </p>
             <button class="view-replies-btn">View Replies <i class="far fa-comments"></i></button>
-            <div class="reply-form">
-              <form action='#' method="post">
-                <label class="form-label" for="responder-name-fill">Name</label>
-                <input type="text" name="responder-name-fill"/>
-                <label class="form-label" for="reply">Reply</label>
-                <input type="text" name="reply"/>
+
+              <form name="reply-form" action='#' method="post">
+                <label class="form-label" for="responder-name">Name</label>
+                <input type="text" name="responder-name"/>
+                <label class="form-label" for="response">Reply</label>
+                <input type="text" name="response"/>
                 <input type="submit" value="Submit"/>
               </form>
-            </div>
+
             <ul class="replies">
               <!--
               <li class="reply">
@@ -90,13 +92,13 @@
         </ul>
       </li>
         </ul>
-        <div id="form-placeholder">
+        <div id="comment-form-placeholder">
           <p class="form-label">New Comment</p>
           <textarea name="message" form="user-comments" placeholder="Leave your comment here..."></textarea>
-          <form name="user-comments" action="/comment" method="post"> 
+          <form name="user-comments" action="/add_comment" method="post"> 
             <div id="name-placeholder">
-              <label class="form-label" for="commenter-name-fill">Name</label>
-              <input type="text" name="commenter-name-fill" class="commenter-name-fill"/>
+              <label class="form-label" for="commenter-name">Name</label>
+              <input type="text" name="commenter-name" class="commenter-name-fill"/>
             </div>
             <div id="submit-placeholder">
               <input type="submit" value="Submit"/>

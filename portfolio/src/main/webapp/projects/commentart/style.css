@@ -195,16 +195,16 @@ ul {
 }
 
 /* REPLY FORM */
-.reply-form {
+form[name='reply-form'] {
   display: none;
 }
 
-input[name='reply'] {
+input[name='response'] {
   width: 70%;
   margin: 0px 5px;
 }
 
-input[name='responder-name-fill'] {
+input[name='responder-name'] {
   width: 30%;
   margin: 0px 5px;
 }
@@ -241,7 +241,7 @@ input[name='responder-name-fill'] {
 }
 
 /* FORM SECTION */
-#form-placeholder {
+#comment-form-placeholder {
   border-top: 1px solid #808080;
   margin-right: max(20px, 10vw);
   display: flex;
