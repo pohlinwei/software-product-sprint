@@ -1,4 +1,5 @@
-function enableAsyncForm(form, getInputs, callBackFunc) {
+/** Enables a form to post request asynchronously.  */
+function enableAsyncForm(form, getInputs, onDataFetched) {
   // TODO: ensure that form is not null
   const requestLink = form.getAttribute('action');
   const submissionBtn = form.querySelector('input[type="submit"]');
@@ -9,7 +10,7 @@ function enableAsyncForm(form, getInputs, callBackFunc) {
       method: 'POST',
       body: JSON.stringify(getInputs())
     }).then(response => response.json())
-      .then(data => callBackFunc(data))
+      .then(data => onDataFetched(data))
       .catch(err => console.log(err));
   }
 }

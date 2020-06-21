@@ -24,7 +24,7 @@ class Comment {
   /** @return {HTML element} HTML element representing this comment */
   get toElement() {
     const commentElement = document.createElement('li');
-    commentElement.innerHTML = this.mainSection;
+    commentElement.innerHTML = this.mainSectionHtml;
 
     const replyForm = this.repliesManager.replyFormElement;
     const replies = this.repliesManager.repliesElement;

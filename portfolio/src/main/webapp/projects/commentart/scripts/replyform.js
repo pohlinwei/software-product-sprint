@@ -14,6 +14,7 @@ class ReplyForm {
     formElement.innerHTML = this.getFormContent();
     this.enableAsyncReply(formElement, addReply);
   }
+  
   /** Gets HTML for reply form. */
   getFormContent() {
     return '<label class="form-label" for="responder-name">Name</label>' +
