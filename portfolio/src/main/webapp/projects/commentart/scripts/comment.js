@@ -8,6 +8,7 @@ class Comment {
   constructor(commenterName, commentMsg, sentiment, repliesManager) {
     this.commenterName = commenterName;
     this.commentMsg = commentMsg;
+    this.sentiment = sentiment;
     this.repliesManager = repliesManager;
   }
 
