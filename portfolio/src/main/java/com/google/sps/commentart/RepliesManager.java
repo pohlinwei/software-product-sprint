@@ -3,6 +3,7 @@ package com.google.sps.commentart;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Represents a manager for all replies. */
 public class RepliesManager {
   private List<Reply> replies;
   private String id;

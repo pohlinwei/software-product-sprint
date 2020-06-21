@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** Adds comment to database. */
 @WebServlet("/add_comment")
 public class AddCommentServlet extends HttpServlet {
   private final Gson gson = new Gson();

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** Adds a reply to the databse. */
 @WebServlet("/add_reply")
 public class AddReplyServlet extends HttpServlet {
   private final Gson gson = new Gson();

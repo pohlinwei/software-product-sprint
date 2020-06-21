@@ -1,5 +1,6 @@
 package com.google.sps.commentart;
 
+/** Represents a reply. */
 public class Reply {
   private String responderName;
   private String response;

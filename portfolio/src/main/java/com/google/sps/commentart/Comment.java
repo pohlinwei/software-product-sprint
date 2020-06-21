@@ -1,5 +1,6 @@
 package com.google.sps.commentart;
 
+/** Represents a comment. */
 public class Comment {
   private String commenterName;
   private String commentMsg;
