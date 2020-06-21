@@ -17,7 +17,7 @@ class Comment {
     const commenterName = commentJson.name;
     const commentMsg = commentJson.commentMsg;
     const commentSentiments = commentJson.sentiment;
-    const repliesManager = RepliesManager.toRepliesManager(commentJson.repliesManager);
+    const repliesManager = RepliesManager.toRepliesManager(commentsJson.repliesManager);
     return new Comment(commenterName, commentMsg, commentSentiments, repliesManager);
   }
 
