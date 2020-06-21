@@ -2,7 +2,7 @@ class Reply {
   /**
    * @param {string} responderName 
    * @param {string} response 
-   * @param {number} sentiment Either 1 (positive) or -1 (negative).
+   * @param {number} sentiment A float that is between -1 and 1.
    */
   constructor(responderName, response, sentiment) {
     this.responderName = responderName;

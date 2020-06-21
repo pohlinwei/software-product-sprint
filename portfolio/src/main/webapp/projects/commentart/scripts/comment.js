@@ -2,7 +2,7 @@ class Comment {
   /**
    * @param {string} commenterName 
    * @param {string} commentMsg Commenter's message.
-   * @param {number} sentiment Either 1 (positive) or -1 (negative).
+   * @param {number} sentiment A float that is between -1 and 1.
    * @param {RepliesManager} repliesManager Manager that manages all associated replies.
    */
   constructor(commenterName, commentMsg, sentiment, repliesManager) {
