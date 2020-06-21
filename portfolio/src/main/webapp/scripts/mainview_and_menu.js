@@ -14,9 +14,9 @@ const showMainView = (shouldShow) => {
   }
 
   if (shouldShow) {
-    dropdownMenu.classList.replace('show', 'hide');   
+    dropdownMenu.classList.replace('show-menu', 'hide-menu');   
   } else {
-    dropdownMenu.classList.replace('hide', 'show');
+    dropdownMenu.classList.replace('hide-menu', 'show-menu');
   }
 }
 
