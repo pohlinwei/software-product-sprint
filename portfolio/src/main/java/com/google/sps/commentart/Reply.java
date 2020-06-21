@@ -5,7 +5,7 @@ public class Reply {
   private String response;
   private int sentiment;
 
-  public Reply(String responderName, String response, int sentiment) {
+  public Reply(String responderName, String response, float sentiment) {
     this.responderName = responderName;
     this.response = response;
     this.sentiment = sentiment;

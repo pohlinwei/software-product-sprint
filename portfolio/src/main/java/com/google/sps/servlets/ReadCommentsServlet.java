@@ -44,7 +44,7 @@ public class ReadCommentsServlet extends HttpServlet {
   private Comment toComment(Entity commentEntity) {
     String commenterName = (String) commentEntity.getProperty("commenterName");
     String commentMsg = (String) commentEntity.getProperty("commentMsg");
-    int sentiment = (int) commentEntity.getProperty("sentiment");
+    float sentiment = (float) commentEntity.getProperty("sentiment");
 
     Key commentKey = commentEntity.getKey();
     Query repliesManagerQuery = new Query("RepliesManager").setAncestor(commentKey);
@@ -75,7 +75,7 @@ public class ReadCommentsServlet extends HttpServlet {
   private Reply toReply(Entity replyEntity) {
     String responderName = (String) replyEntity.getProperty("responderName");
     String response = (String) replyEntity.getProperty("response");
-    int sentiment = (int) replyEntity.getProperty("sentiment");
+    float sentiment = (float) replyEntity.getProperty("sentiment");
     return new Reply(responderName, response, sentiment);
   }
 }
