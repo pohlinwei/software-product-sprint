@@ -1,5 +1,6 @@
 class CommentForm extends InputProvider {
   constructor(commentsManager) {
+    super();
     this.commentsManager = commentsManager;
 
     const commentForm = document.getElementById('comment-form-placeholder');

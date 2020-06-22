@@ -1,5 +1,6 @@
 class CommentsManager extends Updatable {
   constructor() {
+    super();
     this.comments = [];
     this.commentsElement = document.getElementById('comments-placeholder');
     // TODO: ensure that commentsElement exists

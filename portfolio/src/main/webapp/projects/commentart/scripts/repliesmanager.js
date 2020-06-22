@@ -4,16 +4,19 @@ class RepliesManager extends Updatable {
    * @param {Array<Reply>} replies All replies that are managed by this manager.
    */
   constructor(id, replies) {
+    super();
     this.id = id;
     this.replies = replies;
-    this.replyForm = new ReplyForm(id);
+    this.replyForm = null;
     this.repliesElement = this.createRepliesElement();
   }
 
   static toRepliesManager(repliesManagerJson) {
     const id = repliesManagerJson.id;
     const replies = repliesManagerJson.replies.map(replyJson => Reply.toReply(replyJson));
-    return new RepliesManager(id, replies);
+    const repliesManager = new RepliesManager(id, replies);
+    repliesManager.replyForm = new ReplyForm(repliesManager);
+    return repliesManager;
   }
 
   createRepliesElement() {
@@ -32,6 +35,6 @@ class RepliesManager extends Updatable {
   }
   
   get replyFormElement() {
-    return this.replyForm.toElement(this);
+    return this.replyForm.formElement;
   }
 }

@@ -14,7 +14,7 @@ class Comment {
 
   /** Converts a comment that is in .json format to a `Comment` object. */
   static toComment(commentJson) {
-    const commenterName = commentJson.name;
+    const commenterName = commentJson.commenterName;
     const commentMsg = commentJson.commentMsg;
     const commentSentiment = commentJson.sentiment;
     const repliesManager = RepliesManager.toRepliesManager(commentJson.repliesManager);
