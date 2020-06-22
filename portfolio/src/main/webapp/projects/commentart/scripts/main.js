@@ -9,9 +9,10 @@ const fetchAndShowComments = () => {
   fetch('/read_comments')
       .then(response => response.json())
       .then(commentsJson => {
-        const comments = commentsJson.map(commentJson => Comment.toComment(commentJson));
-        const commentsManager = new CommentsManager(comments);
-        enableComment(commentsManager);
+        const commentsManager = new CommentsManager();
+        commentsJson.map(commentJson => commentsManager.onDataFetched(commentJson));
+        const commentForm = new CommentForm(commentsManager);
+        commentForm.enableComment();
       });
 }
 

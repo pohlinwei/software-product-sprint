@@ -16,9 +16,9 @@ class Comment {
   static toComment(commentJson) {
     const commenterName = commentJson.name;
     const commentMsg = commentJson.commentMsg;
-    const commentSentiments = commentJson.sentiment;
+    const commentSentiment = commentJson.sentiment;
     const repliesManager = RepliesManager.toRepliesManager(commentJson.repliesManager);
-    return new Comment(commenterName, commentMsg, commentSentiments, repliesManager);
+    return new Comment(commenterName, commentMsg, commentSentiment, repliesManager);
   }
 
   /** @return {HTML element} HTML element representing this comment */

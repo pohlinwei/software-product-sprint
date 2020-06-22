@@ -1,20 +1,35 @@
-function enableComment(commentsManager) {
-  const commentForm = document.getElementById('comment-form-placeholder');
-  // TODO: ensure that it is not null
-  const formElement = commentForm.querySelector('form');
-  // TODO: ensure that it is non-null
+class CommentForm extends InputProvider {
+  constructor(commentsManager) {
+    this.commentsManager = commentsManager;
 
-  const getInputs = () => {
-    const messageElement = commentForm.querySelector('textarea');
-    // TODO: ensure non-null
-    const message = messageElement.value;
+    const commentForm = document.getElementById('comment-form-placeholder');
+    // TODO: ensure that it is not null
+    this.messageElement = this.findMessageElement(commentForm);
+    this.nameElement = this.findNameElement(commentForm);
+    // TODO: ensure messagElement and nameElement are not null
+  }
 
-    const nameElement = commentForm.querySelector('input[name="commenter-name"]');
-    // TODO: ensure responseElement is non-null
-    const commenterName = nameElement.value;
+  findMessageElement(commentForm) {
+    return commentForm.querySelector('textarea');
+  }
+
+  findNameElement(commentForm) {
+    return commentForm.querySelector('input[name="commenter-name"]');
+  }
+
+  enableComment() {
+    const commentForm = document.getElementById('comment-form-placeholder');
+    // TODO: ensure that it is not null
+    const formElement = commentForm.querySelector('form');
+    // TODO: ensure that it is non-null
+    enableForm(formElement, this, this.commentsManager);
+  }
+
+  /** @override */
+  get inputs() {
+    const message = this.messageElement.value;
+    const commenterName = this.nameElement.value;
 
     return {name: commenterName, message: message};
   }
-
-  enableForm(formElement, getInputs, commentsManager.addComment);
 }
