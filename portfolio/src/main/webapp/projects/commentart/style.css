@@ -200,12 +200,12 @@ form[name='reply-form'] {
 }
 
 input[name='reply-msg'] {
-  width: 70%;
+  width: 60%;
   margin: 0px 5px;
 }
 
 input[name='responder-name'] {
-  width: 30%;
+  width: 25%;
   margin: 0px 5px;
 }
 
