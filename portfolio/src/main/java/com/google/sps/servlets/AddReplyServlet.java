@@ -24,24 +24,24 @@ public class AddReplyServlet extends HttpServlet {
   @Override 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // TODO: Add validation
-    String responseStr = getParameter(request, "response", "");
+    String replyMsg = getParameter(request, "replyMsg", "");
     String responderName = getParameter(request, "responderName", "");
     String managerKeyStr = getParameter(request, "id", "");
     long timestamp = System.currentTimeMillis();
 
-    double sentiment = SentimentUtility.getSentiment(responseStr);
+    double sentiment = SentimentUtility.getSentiment(replyMsg);
 
     Key managerKey = KeyFactory.stringToKey(managerKeyStr);
 
     Entity replyEntity = new Entity("Reply", managerKey);
     replyEntity.setProperty("responderName", responderName);
-    replyEntity.setProperty("response", response);
+    replyEntity.setProperty("replyMsg", response);
     replyEntity.setProperty("sentiment", sentiment);
     replyEntity.setProperty("timestamp", timestamp);
 
     datastore.put(replyEntity);
     
-    Reply reply = new Reply(responderName, responseStr, sentiment);
+    Reply reply = new Reply(responderName, replyMsg, sentiment);
     String json = gson.toJson(reply);
     response.setContentType("application/json;");
     response.getWriter().println(json);

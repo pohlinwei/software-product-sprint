@@ -75,8 +75,8 @@ public class ReadCommentsServlet extends HttpServlet {
 
   private Reply toReply(Entity replyEntity) {
     String responderName = (String) replyEntity.getProperty("responderName");
-    String response = (String) replyEntity.getProperty("response");
+    String replyMsg = (String) replyEntity.getProperty("replyMsg");
     float sentiment = (float) replyEntity.getProperty("sentiment");
-    return new Reply(responderName, response, sentiment);
+    return new Reply(responderName, replyMsg, sentiment);
   }
 }

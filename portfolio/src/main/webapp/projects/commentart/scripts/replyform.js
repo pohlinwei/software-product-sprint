@@ -2,7 +2,7 @@ class ReplyForm extends InputProvider {
   constructor(repliesManager) {
     super();
     this.managerId = repliesManager.id;
-    this.formElement = toElement(repliesManager);
+    this.formElement = this.toElement(repliesManager);
   }
 
   toElement(replyUpdatable) {
@@ -22,8 +22,8 @@ class ReplyForm extends InputProvider {
   /** Gets HTML for reply form. */
   getFormContent() {
     return '<label class="form-label" for="responder-name">Name</label>' +
-        '<input type="text" name="responder-name"/><label class="form-label" for="response">Reply</label>' +
-        '<input type="text" name="response"/><input type="submit" value="Submit"/>';
+        '<input type="text" name="responder-name"/><label class="form-label" for="replyMsg">Reply</label>' +
+        '<input type="text" name="replyMsg"/><input type="submit" value="Submit"/>';
   }
 
   /**
@@ -31,7 +31,7 @@ class ReplyForm extends InputProvider {
    * @param {Updatable} replyUpdatable This updatable performs the necessary updates.
    */
   enableReply(replyUpdatable) {
-    enableForm(this.formElement, this, replyUpdatable);
+    enableForm(formElement, this, replyUpdatable);
   }
 
   /** @override Gets form inputs. */
@@ -40,10 +40,10 @@ class ReplyForm extends InputProvider {
     // TODO: ensure responderNameElement is non-null
     const responderName = responderNameElement.value;
 
-    const responseElement = this.formElement.querySelector('input[name="response"]');
-    // TODO: ensure responseElement is non-null
-    const response = responseElement.value;
+    const replyMsgElement = this.formElement.querySelector('input[name="replyMsg"]');
+    // TODO: ensure replyMsgElement is non-null
+    const replyMsg = replyMsgElement.value;
 
-    return {id: this.managerId, name: responderName, response: response};
+    return {id: this.managerId, name: responderName, replyMsg: replyMsg};
   }
 }
