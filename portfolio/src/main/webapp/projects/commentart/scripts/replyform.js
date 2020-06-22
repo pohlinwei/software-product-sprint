@@ -45,6 +45,6 @@ class ReplyForm extends InputProvider {
     // TODO: ensure replyMsgElement is non-null
     const replyMsg = replyMsgElement.value;
 
-    return {id: this.managerId, name: responderName, replyMsg: replyMsg};
+    return {id: this.managerId, responderName: responderName, replyMsg: replyMsg};
   }
 }

@@ -35,7 +35,7 @@ public class AddReplyServlet extends HttpServlet {
 
     Entity replyEntity = new Entity("Reply", managerKey);
     replyEntity.setProperty("responderName", responderName);
-    replyEntity.setProperty("replyMsg", response);
+    replyEntity.setProperty("replyMsg", replyMsg);
     replyEntity.setProperty("sentiment", sentiment);
     replyEntity.setProperty("timestamp", timestamp);
 
