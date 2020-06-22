@@ -32,6 +32,7 @@ class RepliesManager extends Updatable {
     const newReply = Reply.toReply(replyJson);
     this.replies.push(newReply);
     this.repliesElement.appendChild(newReply.toElement);
+    this.repliesElement.style.display === 'block';
   }
   
   get replyFormElement() {

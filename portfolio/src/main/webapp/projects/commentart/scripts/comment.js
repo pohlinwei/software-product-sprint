@@ -26,11 +26,10 @@ class Comment {
     const commentElement = document.createElement('li');
     commentElement.innerHTML = this.mainSectionHtml;
 
-    const replyForm = this.repliesManager.replyFormElement;
     const replies = this.repliesManager.repliesElement;
-
-    commentElement.appendChild(replyForm);
     commentElement.appendChild(replies);
+    const replyForm = this.repliesManager.replyFormElement;
+    commentElement.appendChild(replyForm);
 
     this.enableToggleReplyForm(commentElement, replyForm);
     this.enableToggleReplies(commentElement, replies);
