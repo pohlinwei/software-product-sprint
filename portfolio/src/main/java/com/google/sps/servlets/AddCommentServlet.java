@@ -27,22 +27,20 @@ public class AddCommentServlet extends HttpServlet {
     String commenterName = getParameter(request, "name", "");
     String commentMsg = getParameter(request, "message", "");
     long timestamp = System.currentTimeMillis();
+    double sentiment = SentimentUtility.getSentiment(commentMsg);
 
     Entity commentEntity = new Entity("CommentWithSenti");
     commentEntity.setProperty("commenterName", commenterName);
     commentEntity.setProperty("commentMsg", commentMsg);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("sentiment", sentiment);
+    datastore.put(commentEntity);
 
     Entity repliesManagerEntity = new Entity("RepliesManager", commentEntity.getKey());
     datastore.put(repliesManagerEntity);
     Key repliesManagerEntityKey = repliesManagerEntity.getKey();
     String repliesManagerEntityKeyStr = KeyFactory.keyToString(repliesManagerEntityKey);
     RepliesManager repliesManager = new RepliesManager(repliesManagerEntityKeyStr);
-
-    double sentiment = SentimentUtility.getSentiment(commentMsg);
-    commentEntity.setProperty("sentiment", sentiment);
-
-    datastore.put(commentEntity);
     
     Comment comment = new Comment(commenterName, commentMsg, sentiment, repliesManager);
     String json = gson.toJson(comment);
