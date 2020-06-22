@@ -9,12 +9,12 @@ import java.io.IOException;
 /** A utility class for computing sentiments. */
 public class SentimentUtility {
   /** Returns sentiment of the given message. */
-  public static float getSentiment(String message) throws IOException {
+  public static double getSentiment(String message) throws IOException {
     Document doc =
         Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-    float score = sentiment.getScore();
+    double score = sentiment.getScore();
     languageService.close();
     return score;
   }

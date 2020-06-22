@@ -4,9 +4,9 @@ package com.google.sps.commentart;
 public class Reply {
   private String responderName;
   private String response;
-  private float sentiment;
+  private double sentiment;
 
-  public Reply(String responderName, String response, float sentiment) {
+  public Reply(String responderName, String response, double sentiment) {
     this.responderName = responderName;
     this.response = response;
     this.sentiment = sentiment;

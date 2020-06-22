@@ -34,11 +34,12 @@ public class AddCommentServlet extends HttpServlet {
     commentEntity.setProperty("timestamp", timestamp);
 
     Entity repliesManagerEntity = new Entity("RepliesManager", commentEntity.getKey());
+    datastore.put(repliesManagerEntity);
     Key repliesManagerEntityKey = repliesManagerEntity.getKey();
     String repliesManagerEntityKeyStr = KeyFactory.keyToString(repliesManagerEntityKey);
     RepliesManager repliesManager = new RepliesManager(repliesManagerEntityKeyStr);
 
-    float sentiment = SentimentUtility.getSentiment(commentMsg);
+    double sentiment = SentimentUtility.getSentiment(commentMsg);
     commentEntity.setProperty("sentiment", sentiment);
 
     datastore.put(commentEntity);

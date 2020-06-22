@@ -4,10 +4,10 @@ package com.google.sps.commentart;
 public class Comment {
   private String commenterName;
   private String commentMsg;
-  private float sentiment;
+  private double sentiment;
   private RepliesManager repliesManager;
 
-  public Comment(String commenterName, String commentMsg, float sentiment, RepliesManager repliesManager) {
+  public Comment(String commenterName, String commentMsg, double sentiment, RepliesManager repliesManager) {
     this.commenterName = commenterName;
     this.commentMsg = commentMsg;
     this.sentiment = sentiment;

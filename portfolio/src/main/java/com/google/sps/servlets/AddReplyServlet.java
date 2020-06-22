@@ -29,7 +29,7 @@ public class AddReplyServlet extends HttpServlet {
     String managerKeyStr = getParameter(request, "id", "");
     long timestamp = System.currentTimeMillis();
 
-    float sentiment = SentimentUtility.getSentiment(responseStr);
+    double sentiment = SentimentUtility.getSentiment(responseStr);
 
     Key managerKey = KeyFactory.stringToKey(managerKeyStr);
 
