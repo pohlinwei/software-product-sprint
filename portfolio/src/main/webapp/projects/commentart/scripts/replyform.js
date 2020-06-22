@@ -22,8 +22,8 @@ class ReplyForm extends InputProvider {
   /** Gets HTML for reply form. */
   getFormContent() {
     return '<label class="form-label" for="responder-name">Name</label>' +
-        '<input type="text" name="responder-name"/><label class="form-label" for="replyMsg">Reply</label>' +
-        '<input type="text" name="replyMsg"/><input type="submit" value="Submit"/>';
+        '<input type="text" name="responder-name"/><label class="form-label" for="reply-msg">Reply</label>' +
+        '<input type="text" name="reply-msg"/><input type="submit" value="Submit"/>';
   }
 
   /**
@@ -41,7 +41,7 @@ class ReplyForm extends InputProvider {
     // TODO: ensure responderNameElement is non-null
     const responderName = responderNameElement.value;
 
-    const replyMsgElement = this.formElement.querySelector('input[name="replyMsg"]');
+    const replyMsgElement = this.formElement.querySelector('input[name="reply-msg"]');
     // TODO: ensure replyMsgElement is non-null
     const replyMsg = replyMsgElement.value;
 
