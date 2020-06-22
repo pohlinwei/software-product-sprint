@@ -28,9 +28,10 @@ class ReplyForm extends InputProvider {
 
   /**
    * Enables the reply form.
+   * @param {HTML Form Element} formElement This reply form element.
    * @param {Updatable} replyUpdatable This updatable performs the necessary updates.
    */
-  enableReply(replyUpdatable) {
+  enableReply(formElement, replyUpdatable) {
     enableForm(formElement, this, replyUpdatable);
   }
 
