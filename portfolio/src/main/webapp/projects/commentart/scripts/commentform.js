@@ -1,36 +1,31 @@
-class CommentForm extends InputProvider {
-  constructor(commentsManager) {
-    super();
-    this.commentsManager = commentsManager;
+/** Enables comment form. */
+const enableCommentForm = () => {
+  const commentForm = document.getElementById('comment-form-placeholder');
+  const messageElement = commentForm.querySelector('textarea');
+  const nameElement = commentForm.querySelector('input[name="commenter-name"]');
 
-    const commentForm = document.getElementById('comment-form-placeholder');
-    // TODO: ensure that it is not null
-    this.messageElement = this.findMessageElement(commentForm);
-    this.nameElement = this.findNameElement(commentForm);
-    // TODO: ensure messagElement and nameElement are not null
-  }
-
-  findMessageElement(commentForm) {
-    return commentForm.querySelector('textarea');
-  }
-
-  findNameElement(commentForm) {
-    return commentForm.querySelector('input[name="commenter-name"]');
-  }
-
-  enableComment() {
-    const commentForm = document.getElementById('comment-form-placeholder');
-    // TODO: ensure that it is not null
-    const formElement = commentForm.querySelector('form');
-    // TODO: ensure that it is non-null
-    enableForm(formElement, this, this.commentsManager);
-  }
-
-  /** @override */
-  get inputs() {
-    const message = this.messageElement.value;
-    const commenterName = this.nameElement.value;
-
+  const getCommentInputs = () => {
+    const message = messageElement.value;
+    const commenterName = nameElement.value;
     return {name: commenterName, message: message};
   }
+  
+  const commentsPlaceholder = document.getElementById('comments-placeholder');
+  const onDataFetched = (commentResponse) => {
+    const message = messageElement.value;
+    const commenterName = nameElement.value;
+    const commentId = commentResponse.commentId;
+    const commentColour = commentResponse.commentColour; // TODO: how is this represented?
+    commentsPlaceholder.appendChild(createComment(commentId, commenterName, message, commentColour)); 
+
+    clearInput(nameElement);
+    clearInput(messageElement);
+
+    updatePainting(commentResponse.paints); // TODO: implement `updatePainting`
+  }
+  
+  const commentSubmitButton = commentForm.querySelector('input[type="submit"]');
+  const commentRequestLink = commentForm.getAttribute('action');
+
+  enableForm(commentSubmitButton, commentRequestLink, getCommentInputs, onDataFetched);
 }

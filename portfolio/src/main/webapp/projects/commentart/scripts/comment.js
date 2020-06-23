@@ -1,67 +1,55 @@
-class Comment {
-  /**
-   * @param {string} commenterName 
-   * @param {string} commentMsg Commenter's message.
-   * @param {number} sentiment A float that is between -1 and 1.
-   * @param {RepliesManager} repliesManager Manager that manages all associated replies.
-   */
-  constructor(commenterName, commentMsg, sentiment, repliesManager) {
-    this.commenterName = commenterName;
-    this.commentMsg = commentMsg;
-    this.sentiment = sentiment;
-    this.repliesManager = repliesManager;
-  }
+/**
+ * Creates a comment an HTML element that represents the comment.
+ * @param {string} commentId Id that is used for retrieval of this comment from database.
+ * @param {string} commenterName Name of the commenter that is to be displayed.
+ * @param {string} message Message that is to be displayed.
+ * @param {string} commentColour Colour which is used to highlight the commenter's name.
+ * @param {?Array<HTMLElement>} replies Reply elements that belong to this comment.
+ */
+function createComment(commentId, commenterName, message, commentColour, replies) {
+  const commentElement = document.createElement('li');
+  
+  // TODO: add colour here
+  commentElement.innerHTML = `<div class="comment-header">` +
+      `<p><span class="commenter-name">${commenterName}</span> says</p>` +  
+      `<p class="reply-text"><span class="reply-button">reply</span></p>` + 
+      `</div><p>${message}</p>` +
+      `<button class="view-replies-btn">View Replies <i class="far fa-comments"></i></button>`;
+  
+  const repliesPlaceholder = document.createElement('ul');
+  repliesPlaceholder.setAttribute('class', 'replies');
+  repliesPlaceholder.innerHTML = replies != null ? replies.map(reply => reply.outerHTML).join('') : '';
+  commentElement.appendChild(repliesPlaceholder); 
 
-  /** Converts a comment that is in .json format to a `Comment` object. */
-  static toComment(commentJson) {
-    const commenterName = commentJson.commenterName;
-    const commentMsg = commentJson.commentMsg;
-    const commentSentiment = commentJson.sentiment;
-    const repliesManager = RepliesManager.toRepliesManager(commentJson.repliesManager);
-    return new Comment(commenterName, commentMsg, commentSentiment, repliesManager);
-  }
-
-  /** @return {HTML element} HTML element representing this comment */
-  get toElement() {
-    const commentElement = document.createElement('li');
-    commentElement.innerHTML = this.mainSectionHtml;
-
-    const replies = this.repliesManager.repliesElement;
-    commentElement.appendChild(replies);
-    const replyForm = this.repliesManager.replyFormElement;
-    commentElement.appendChild(replyForm);
-
-    this.enableToggleReplyForm(commentElement, replyForm);
-    this.enableToggleReplies(commentElement, replies);
-    return commentElement;
-  }
-
-  /** @return {HTML as string} HTML for commenter's name, comment message and view replies button. */
-  get mainSectionHtml() {
-    return `<div class="comment-header">` +
-        `<p><span class="commenter-name">${this.commenterName}</span> says</p>` +  
-        `<p class="reply-text"><span class="reply-button">reply</span></p>` + 
-        `</div><p>${this.commentMsg}</p>` +
-        `<button class="view-replies-btn">View Replies <i class="far fa-comments"></i></button>`;
-  }
+  const replyForm = createReplyForm(commentId, repliesPlaceholder);
+  commentElement.appendChild(replyForm);
 
   /** Hides/shows reply form when reply button is clicked. */
-  enableToggleReplyForm(commentElement, replyForm) {
+  const enableToggleReplyForm = () => {
     const replyButton = commentElement.querySelector('.reply-button');
-    // TODO: add validation to ensure that replyButton is not null
     replyButton.onclick = () => {
       const isDisplayed = replyForm.style.display === 'block';
       replyForm.style.display = isDisplayed ? 'none' : 'block';
     }
   }
+  enableToggleReplyForm();
 
   /** Hides/shows replies when 'view replies' button is clicked. */
-  enableToggleReplies(commentElement, replies) {
+  const enableToggleReplies = () => {
     const viewRepliesButton = commentElement.querySelector('.view-replies-btn');
-    // TODO: Ensure that the button is non-null
     viewRepliesButton.onclick = () => {
-      const isDisplayed = replies.style.display === 'block';
-      replies.style.display = isDisplayed ? 'none' : 'block';
+      const isDisplayed = repliesPlaceholder.style.display === 'block';
+      repliesPlaceholder.style.display = isDisplayed ? 'none' : 'block';
     };
   }
+  enableToggleReplies();
+    
+  return commentElement;
+}
+
+/** Converts a JSON representation of comment to a comment HTML element. */
+const toComment = (commentJson) => {
+  const replies = commentJson.replies.forEach(replyJson => toReply(replyJson));
+  return createComment(commentJson.id, commentJson.commenterName, commentJson.message,
+      commentJson.commentColour, replies);
 }

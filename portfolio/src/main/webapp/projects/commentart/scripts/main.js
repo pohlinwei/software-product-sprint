@@ -4,16 +4,26 @@ const main = () => {
   body.onload = fetchAndShowComments;
 }
 
-/** Fetches comments from the server. */
+const READ_SERVER_LINK = '/read_comments';
+/** Fetches and loads all required data. */
 const fetchAndShowComments = () => {
-  fetch('/read_comments')
+  fetch(READ_SERVER_LINK)
       .then(response => response.json())
-      .then(commentsJson => {
-        const commentsManager = new CommentsManager();
-        commentsJson.map(commentJson => commentsManager.onDataFetched(commentJson));
-        const commentForm = new CommentForm(commentsManager);
-        commentForm.enableComment();
-      });
+      .then(readResponse => {
+        const commentsJson = readResponse.comments;
+        setupComments(commentsJson);
+        const paintsJson = readResponse.paints;
+        // TODO: add function to alter colour
+        enableCommentForm();
+      })
+      .catch(err => console.error(err));
+}
+
+/** Sets up the comment section. */
+const setupComments = (commentsJson) => {
+  const commentsPlaceholder = document.getElementById('comments-placeholder');
+  commentsPlaceholder.innerHTML = commentsJson.map(commentJson => toComment(commentJson).outerHTML)
+      .join('');
 }
 
 main();

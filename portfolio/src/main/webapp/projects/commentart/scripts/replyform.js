@@ -1,50 +1,47 @@
-class ReplyForm extends InputProvider {
-  constructor(repliesManager) {
-    super();
-    this.managerId = repliesManager.id;
-    this.formElement = this.toElement(repliesManager);
-  }
+/**
+ * Creates a reply form HTML element.
+ * @param {string} commentId Id indicates which comment this form belongs to.
+ * @param {HTMLElement} repliesPlaceholder Placeholder where new replies should be appended to.
+ */
+function createReplyForm(commentId, repliesPlaceholder) {
+  const replyForm = document.createElement('form');
 
-  toElement(replyUpdatable) {
-    const formElement = document.createElement('form');
+  replyForm.setAttribute('name', 'reply-form');
+  const SERVER_URL = '/add_reply';
+  replyForm.setAttribute('action', SERVER_URL);
+  replyForm.setAttribute('method', 'post');
 
-    formElement.setAttribute('name', 'reply-form');
-    const SERVER_URL = '/add_reply';
-    formElement.setAttribute('action', SERVER_URL);
-    formElement.setAttribute('method', 'post');
-
-    formElement.innerHTML = this.getFormContent();
-    this.enableReply(formElement, replyUpdatable);
-
-    return formElement;
-  }
+  replyForm.innerHTML = '<label class="form-label" for="responder-name">Name</label>' +
+      '<input type="text" name="responder-name"/><label class="form-label" for="reply-msg">Reply</label>' +
+      '<input type="text" name="reply-msg"/><input type="submit" value="Submit"/>';
   
-  /** Gets HTML for reply form. */
-  getFormContent() {
-    return '<label class="form-label" for="responder-name">Name</label>' +
-        '<input type="text" name="responder-name"/><label class="form-label" for="reply-msg">Reply</label>' +
-        '<input type="text" name="reply-msg"/><input type="submit" value="Submit"/>';
+  const enableReplyForm = () => {
+    const responderNameElement = replyForm.querySelector('input[name="responder-name"]');
+    const replyMsgElement = replyForm.querySelector('input[name="reply-msg"]');
+
+    const getReplyInputs = () => {
+      const responderName = responderNameElement.value;
+      const replyMsg = replyMsgElement.value;
+      return {id: commentId, responderName: responderName, replyMsg: replyMsg};
+    }
+
+    const onDataFetched = (replyResponse) => {
+      const responderName = responderNameElement.value;
+      const replyMsg = replyMsgElement.value;
+      const replyColour = replyResponse.replyColour; 
+      repliesPlaceholder.appendChild(createReply(responderName, replyMsg, replyColour));
+
+      clearInput(responderNameElement);
+      clearInput(replyMsgElement);
+      repliesPlaceholder.style.display === 'block';
+
+      updatePainting(replyResponse.paints); // TODO: implement `updatePainting`
+    }
+
+    const replySubmitButton = replyForm.querySelector('input[type="submit"]');
+    enableForm(replySubmitButton, SERVER_URL, getReplyInputs, onDataFetched);
   }
+  enableReplyForm();
 
-  /**
-   * Enables the reply form.
-   * @param {HTML Form Element} formElement This reply form element.
-   * @param {Updatable} replyUpdatable This updatable performs the necessary updates.
-   */
-  enableReply(formElement, replyUpdatable) {
-    enableForm(formElement, this, replyUpdatable);
-  }
-
-  /** @override Gets form inputs. */
-  get inputs() {
-    const responderNameElement = this.formElement.querySelector('input[name="responder-name"]');
-    // TODO: ensure responderNameElement is non-null
-    const responderName = responderNameElement.value;
-
-    const replyMsgElement = this.formElement.querySelector('input[name="reply-msg"]');
-    // TODO: ensure replyMsgElement is non-null
-    const replyMsg = replyMsgElement.value;
-
-    return {id: this.managerId, responderName: responderName, replyMsg: replyMsg};
-  }
+  return replyForm;
 }

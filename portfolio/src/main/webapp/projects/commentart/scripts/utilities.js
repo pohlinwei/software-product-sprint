@@ -1,34 +1,34 @@
-/** 
- * Enables a form to post request.  
- * @param {HTML Form element} form
- * @param {InputProvider} inputProvider Provides the necessary inputs.
- * @param {Updatable} updatable Performs the necessary updates.
+/** Clears user input that is specified at `element`. */
+const clearInput = (element) => element.value = '';
+
+/**
+ * Enables form submission.
+ * @param {HTMLElement} submitButton Submit button for the form.
+ * @param {string} requestLink Link to which the data should be sent.
+ * @param {function():any} getInputs Gets the user inputs that need to be sent.
+ * @param {function():void} onDataFetched Manipulates the retrieved data.
  */
-function enableForm(form, inputProvider, updatable) {
-  // TODO: ensure that form is not null
-  const requestLink = form.getAttribute('action');
-  const submissionBtn = form.querySelector('input[type="submit"]');
-  // TODO: ensure that submissionBtn is not null
-  submissionBtn.onclick = (event) => {
+function enableForm(submitButton, requestLink, getInputs, onDataFetched) {
+  submitButton.onclick = (event) => {
     event.preventDefault();
     fetch(requestLink, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: toFormUrlEncoded(inputProvider.inputs)
+      body: toFormUrlEncoded(getInputs())
     }).then(response => response.json())
-      .then(data => updatable.onDataFetched(data))
+      .then(data => onDataFetched(data))
       .catch(err => console.log(err));
   }
-}
 
-/**
- * Converts the specified object to x-www-form-urlencoded format.
- * @param {any} object 
- */
-function toFormUrlEncoded(object) {
-  return Object.entries(object)
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-    .join('&');
+  /**
+   * Converts the specified object to x-www-form-urlencoded format.
+   * @param {any} object 
+   */
+  function toFormUrlEncoded(object) {
+    return Object.entries(object)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join('&');
+  }
 }
