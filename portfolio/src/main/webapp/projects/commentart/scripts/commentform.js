@@ -15,7 +15,7 @@ const enableCommentForm = () => {
     const message = messageElement.value;
     const commenterName = nameElement.value;
     const commentId = commentResponse.commentId;
-    const commentColour = commentResponse.commentColour; // TODO: how is this represented?
+    const commentColour = commentResponse.commentColour;
     commentsPlaceholder.appendChild(createComment(commentId, commenterName, message, commentColour)); 
 
     clearInput(nameElement);

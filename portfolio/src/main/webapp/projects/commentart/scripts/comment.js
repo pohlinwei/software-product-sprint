@@ -50,6 +50,6 @@ function createComment(commentId, commenterName, message, commentColour, replies
 /** Converts a JSON representation of comment to a comment HTML element. */
 const toComment = (commentJson) => {
   const replies = commentJson.replies.forEach(replyJson => toReply(replyJson));
-  return createComment(commentJson.id, commentJson.commenterName, commentJson.message,
+  return createComment(commentJson.commentId, commentJson.commenterName, commentJson.message,
       commentJson.commentColour, replies);
 }

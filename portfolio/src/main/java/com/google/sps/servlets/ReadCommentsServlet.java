@@ -1,82 +1,61 @@
 package com.google.sps.servlets;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.gson.Gson;
-import com.google.sps.commentart.Comment;
-import com.google.sps.commentart.RepliesManager;
-import com.google.sps.commentart.Reply;
+import com.google.sps.commentart.Palette;
+import com.google.sps.commentart.Utility;
+import com.google.sps.commentart.ViewableComment;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Returns a list of comments that are posted on CommentArt. */
 @WebServlet("/read_comments")
-public class ReadCommentsServlet extends HttpServlet {
-  private final Gson gson = new Gson();
-  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
+public class ReadCommentsServlet extends CommentArtServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query commentQuery = new Query("CommentWithSenti").addSort("timestamp", SortDirection.ASCENDING);
-    PreparedQuery results = datastore.prepare(commentQuery);
+    PreparedQuery commentsResults = datastore.prepare(commentQuery);
 
-    List<Comment> comments = new ArrayList<>();
-    for (Entity commentEntity : results.asIterable()) {
-      comments.add(toComment(commentEntity));
+    List<ViewableComment> comments = new ArrayList<>();
+    for (Entity commentEntity : commentsResults.asIterable()) {
+      Iterable<Entity> replyEntities = getReplyEntities(commentEntity.getKey());
+      comments.add(ViewableComment.toComment(commentEntity, replyEntities));
+      painter.addPalette(Palette.toPalette(commentEntity, replyEntities)); 
     }
-    String json = gson.toJson(comments);
+
+    List<String> paints = new ArrayList<>();
+    painter.getPaints().forEach(paint -> paints.add(Utility.colorToString(paint))); 
+    ReadResponse readResponse = new ReadResponse(comments, paints);
+
+    String json = gson.toJson(readResponse);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-  private Comment toComment(Entity commentEntity) {
-    String commenterName = (String) commentEntity.getProperty("commenterName");
-    String commentMsg = (String) commentEntity.getProperty("commentMsg");
-    double sentiment = (double) commentEntity.getProperty("sentiment");
-
-    Key commentKey = commentEntity.getKey();
-    Query repliesManagerQuery = new Query("RepliesManager").setAncestor(commentKey);
-    List<Entity> repliesManagerEntities = datastore.prepare(repliesManagerQuery)
-        .asList(FetchOptions.Builder.withDefaults());
-    // TODO: add assertion to ensure that there is only one manager entity
-    Entity repliesManagerEntity = repliesManagerEntities.get(0);
-    RepliesManager repliesManager = toRepliesManager(repliesManagerEntity);
-
-    return new Comment(commenterName, commentMsg, sentiment, repliesManager);
+  /** Gets all {@code Entity}s whose ancestor is associated with {@code commentKey}. */
+  private Iterable<Entity> getReplyEntities(Key commentKey) {
+    Query repliesQuery = new Query("Reply").setAncestor(commentKey)
+        .addSort("timestamp", SortDirection.ASCENDING);
+    PreparedQuery repliesResults = datastore.prepare(repliesQuery);
+    return repliesResults.asIterable();
   }
 
-  private RepliesManager toRepliesManager(Entity repliesManagerEntity) {
-    Key repliesManagerKey = repliesManagerEntity.getKey();
-    String repliesManagerKeyStr = KeyFactory.keyToString(repliesManagerKey);
-    RepliesManager repliesManager = new RepliesManager(repliesManagerKeyStr);
+  /** Representation of the response returned as a result of a POST request to {@code ReadCommentsServlet}. */
+  private class ReadResponse {
+    List<ViewableComment> comments;
+    List<String> paints;
 
-    Query replyQuery = new Query("Reply").setAncestor(repliesManagerKey)
-      .addSort("timestamp", SortDirection.ASCENDING);
-    Iterable<Entity> replyEntitiesIterator = datastore.prepare(replyQuery).asIterable();
-    
-    for (Entity replyEntity : replyEntitiesIterator) {
-      repliesManager.addReply(toReply(replyEntity));
+    ReadResponse(List<ViewableComment> comments, List<String> paints) {
+      this.comments = comments;
+      this.paints = paints;
     }
-
-    return repliesManager;
-  }
-
-  private Reply toReply(Entity replyEntity) {
-    String responderName = (String) replyEntity.getProperty("responderName");
-    String replyMsg = (String) replyEntity.getProperty("replyMsg");
-    double sentiment = (double) replyEntity.getProperty("sentiment");
-    return new Reply(responderName, replyMsg, sentiment);
   }
 }
