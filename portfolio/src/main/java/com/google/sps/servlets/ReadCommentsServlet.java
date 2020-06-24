@@ -27,7 +27,7 @@ public class ReadCommentsServlet extends CommentArtServlet {
     List<ViewableComment> comments = new ArrayList<>();
     for (Entity commentEntity : commentsResults.asIterable()) {
       Iterable<Entity> replyEntities = getReplyEntities(commentEntity.getKey());
-      comments.add(ViewableComment.toComment(commentEntity, replyEntities));
+      comments.add(new ViewableComment(commentEntity, replyEntities));
       painter.addPalette(Palette.toPalette(commentEntity, replyEntities)); 
     }
 

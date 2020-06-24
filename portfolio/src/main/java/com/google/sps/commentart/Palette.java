@@ -12,10 +12,10 @@ import java.awt.Color;
  *  main colour and the other colours).
  */
 public class Palette {
-  private String id;
+  private final String id;
+  private final Color mainColour;
+  private final List<Color> otherColours;
   private Color resultantColour;
-  private Color mainColour;
-  private List<Color> otherColours;
 
   /**
    * @param id Id that is to be associated with {@code this}.

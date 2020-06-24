@@ -12,7 +12,7 @@ function createReply(responderName, replyMsg, replyColour) {
   return replyElement;
 }
 
-/** Converts a JSON representation of reply to a reply HTML element. */
-const toReply = (replyJson) => {
+/** Creates a reply HTML element from its JSON representation. */
+const createReplyElementFromJson = (replyJson) => {
   return createReply(replyJson.responderName, replyJson.replyMsg, replyJson.replyColour);
 }

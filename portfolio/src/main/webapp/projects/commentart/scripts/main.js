@@ -22,7 +22,8 @@ const fetchAndShowComments = () => {
 /** Sets up the comment section. */
 const setupComments = (commentsJson) => {
   const commentsPlaceholder = document.getElementById('comments-placeholder');
-  commentsPlaceholder.innerHTML = commentsJson.map(commentJson => toComment(commentJson).outerHTML)
+  commentsPlaceholder.innerHTML = commentsJson
+      .map(commentJson => createCommentElementFromJson(commentJson).outerHTML)
       .join('');
 }
 

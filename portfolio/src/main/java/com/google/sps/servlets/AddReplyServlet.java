@@ -44,17 +44,6 @@ public class AddReplyServlet extends CommentArtServlet {
     response.getWriter().println(json);
   }
 
-  /** Representation of the response returned as a result of a POST request to {@code AddReplyServlet}. */
-  private class AddReplyResponse {
-    String replyColour;
-    List<String> paints;
-
-    public AddReplyResponse(String replyColour, List<String> paints) {
-      this.replyColour = replyColour;
-      this.paints = paints;
-    }
-  }
-
   // TODO: abstract this function
   /**
    * Requests user-input value for the specified parameter, 
@@ -66,5 +55,16 @@ public class AddReplyServlet extends CommentArtServlet {
       return defaultValue;
     }
     return value;
+  }
+
+  /** Representation of the response returned as a result of a POST request to {@code AddReplyServlet}. */
+  private class AddReplyResponse {
+    String replyColour;
+    List<String> paints;
+
+    public AddReplyResponse(String replyColour, List<String> paints) {
+      this.replyColour = replyColour;
+      this.paints = paints;
+    }
   }
 }

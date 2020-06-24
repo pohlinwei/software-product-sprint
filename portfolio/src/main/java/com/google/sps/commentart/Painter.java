@@ -1,8 +1,8 @@
 package com.google.sps.commentart;
 
 import java.awt.Color;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -26,7 +26,7 @@ public class Painter {
   }
 
   /** Gets all paints that are available. */
-  public Collection<Color> getPaints() {
+  public List<Color> getPaints() {
     return paints.values()
         .stream()
         .map(palette -> palette.getResultantColour())

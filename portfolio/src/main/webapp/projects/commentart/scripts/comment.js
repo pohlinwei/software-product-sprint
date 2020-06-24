@@ -47,9 +47,10 @@ function createComment(commentId, commenterName, message, commentColour, replies
   return commentElement;
 }
 
-/** Converts a JSON representation of comment to a comment HTML element. */
-const toComment = (commentJson) => {
-  const replies = commentJson.replies.forEach(replyJson => toReply(replyJson));
-  return createComment(commentJson.commentId, commentJson.commenterName, commentJson.message,
-      commentJson.commentColour, replies);
+/** Creates a comment HTML element from its JSON representation. */
+const createCommentElementFromJson = (commentJson) => {
+  const replies = commentJson.replies
+      .forEach(replyJson => createReplyElementFromJson(replyJson));
+  return createComment(commentJson.commentId, commentJson.commenterName, 
+      commentJson.message, commentJson.commentColour, replies);
 }

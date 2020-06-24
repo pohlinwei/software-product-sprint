@@ -45,6 +45,18 @@ public class AddCommentServlet extends CommentArtServlet {
     response.getWriter().println(json);
   }
 
+  /**
+   * Requests user-input value for the specified parameter, 
+   * and returns the default value if the user-input value is null.
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
   /** Representation of the response returned as a result of a POST request to {@code AddCommentServlet}. */
   private class AddCommentResponse {
     String commentId;
@@ -56,17 +68,5 @@ public class AddCommentServlet extends CommentArtServlet {
       this.commentColour = commentColour;
       this.paints = paints;
     }
-  }
-
-  /**
-   * Requests user-input value for the specified parameter, 
-   * and returns the default value if the user-input value is null.
-   */
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
   }
 }
