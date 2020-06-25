@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Lin Wei">
+    <meta name="description" content="Lin Wei's portfolio">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CommentArt</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <script src="scripts/utilities.js" defer></script>
+    <script src="scripts/painting.js" defer></script>
+    <script src="scripts/reply.js" defer></script>
+    <script src="scripts/replyform.js" defer></script>
+    <script src="scripts/comment.js" defer></script>
+    <script src="scripts/commentform.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>CommentArt:</h1>
+      <h2>'Painting' with Comments</h2>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <!--TODO: add about-->
+        <li><a href="">About</a></li>
+        <!--TODO: add link to code-->
+        <li><a href="">Code</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section id="painting-view">
+        <div id="painting">
+          <h2>Our Art</h2>
+        </div>
+        <h2>Why these colours?</h2>
+        <p>
+          These colours are influenced by the sentiments of the comments and replies posted 
+          <a href="#comments" class="emphasised-link">below</a>. Are you interested in the mechanism of how this works? 
+          Click <a href="#" class="emphasised-link">here</a> to find out more!
+        </p>
+        <h2>Can I interact with it?</h2>
+        <p>
+          Of course! Click on <span class="italicised-text">Our Art</span> above to filter the comments by date.
+          Then, the resulting painting will be restricted to the sentiments of comments from that period of time.
+          Alternatively, if you feel like contributing, leave a comment 
+          <a href="#form-placeholder" class="emphasised-link">below</a>!
+        </p>
+      </section>
+      <section id="comments">
+        <h2>Comments: </h2>
+        <ul id="comments-placeholder">
+        </ul>
+        <div id="comment-form-placeholder">
+          <p class="form-label">New Comment</p>
+          <textarea name="message" form="user-comments" placeholder="Leave your comment here..."></textarea>
+          <form name="user-comments" action="/add_comment" method="post"> 
+            <div id="name-placeholder">
+              <label class="form-label" for="commenter-name">Name</label>
+              <input type="text" name="commenter-name" class="commenter-name-fill"/>
+            </div>
+            <div id="submit-placeholder">
+              <input type="submit" value="Submit"/>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
