@@ -7,8 +7,13 @@
 function createReply(responderName, replyMsg, replyColour) {
   const replyElement = document.createElement('li');
   replyElement.classList.add('reply');
-  replyElement.innerHTML = `<p><span class="responder-name">${responderName}</span>:</p>` +
+  replyElement.innerHTML = `<p><span class="responder-name"><mark>${responderName}</mark></span>:</p>` +
       `<div class="response"><p>${replyMsg}</p></div>`;
+
+  // highlight responder's name 
+  const responderNameElement = replyElement.querySelector('mark');
+  responderNameElement.style.backgroundColor = replyColour;
+
   return replyElement;
 }
 

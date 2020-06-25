@@ -11,10 +11,14 @@ function createComment(commentId, commenterName, message, commentColour, replies
   
   // TODO: add colour here
   commentElement.innerHTML = `<div class="comment-header">` +
-      `<p><span class="commenter-name">${commenterName}</span> says</p>` +  
+      `<p><span class="commenter-name"><mark>${commenterName}</mark></span> says</p>` +  
       `<p class="reply-text"><span class="reply-button">reply</span></p>` + 
       `</div><p>${message}</p>` +
       `<button class="view-replies-btn">View Replies <i class="far fa-comments"></i></button>`;
+
+  // highlight commenter's name
+  const commenterNameElement = commentElement.querySelector('mark');
+  commenterNameElement.style.backgroundColor = commentColour;
   
   const repliesPlaceholder = document.createElement('ul');
   repliesPlaceholder.setAttribute('class', 'replies');
