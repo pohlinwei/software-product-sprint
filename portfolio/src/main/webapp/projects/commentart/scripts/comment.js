@@ -49,8 +49,9 @@ function createComment(commentId, commenterName, message, commentColour, replies
 
 /** Creates a comment HTML element from its JSON representation. */
 const createCommentElementFromJson = (commentJson) => {
-  const replies = commentJson.replies
-      .forEach(replyJson => createReplyElementFromJson(replyJson));
+  const replies = [];
+  commentJson.replies
+      .forEach(replyJson => replies.push(createReplyElementFromJson(replyJson)));
   return createComment(commentJson.commentId, commentJson.commenterName, 
       commentJson.message, commentJson.commentColour, replies);
 }
