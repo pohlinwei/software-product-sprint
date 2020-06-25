@@ -35,7 +35,7 @@ function createReplyForm(commentId, repliesPlaceholder) {
       clearInput(replyMsgElement);
       repliesPlaceholder.style.display = 'block';
 
-      updatePainting(replyResponse.paints); // TODO: implement `updatePainting`
+      updatePainting(replyResponse.paints);
     }
 
     const replySubmitButton = replyForm.querySelector('input[type="submit"]');

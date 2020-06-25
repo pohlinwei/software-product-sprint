@@ -9,7 +9,6 @@
 function createComment(commentId, commenterName, message, commentColour, replies) {
   const commentElement = document.createElement('li');
   
-  // TODO: add colour here
   commentElement.innerHTML = `<div class="comment-header">` +
       `<p><span class="commenter-name"><mark>${commenterName}</mark></span> says</p>` +  
       `<p class="reply-text"><span class="reply-button">reply</span></p>` + 

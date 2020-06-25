@@ -21,7 +21,7 @@ const enableCommentForm = () => {
     clearInput(nameElement);
     clearInput(messageElement);
 
-    updatePainting(commentResponse.paints); // TODO: implement `updatePainting`
+    updatePainting(commentResponse.paints);
   }
   
   const commentSubmitButton = commentForm.querySelector('input[type="submit"]');

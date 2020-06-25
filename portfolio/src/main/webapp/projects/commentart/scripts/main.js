@@ -12,8 +12,7 @@ const fetchAndShowComments = () => {
       .then(readResponse => {
         const commentsJson = readResponse.comments;
         setupComments(commentsJson);
-        const paintsJson = readResponse.paints;
-        // TODO: add function to alter colour
+        paintArt(readResponse.paints);
         enableCommentForm();
       })
       .catch(err => console.error(err));
