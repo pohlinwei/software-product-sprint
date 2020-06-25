@@ -26,12 +26,13 @@ public class AddReplyServlet extends CommentArtServlet {
     long timestamp = System.currentTimeMillis();
 
     Color replyColour = Utility.getColour(replyMsg);
+    String replyColourString = Utility.colorToString(replyColour);
 
     Key commentKey = KeyFactory.stringToKey(commentId);
     Entity replyEntity = new Entity("Reply", commentKey);
     replyEntity.setProperty("responderName", responderName);
     replyEntity.setProperty("replyMsg", replyMsg);
-    replyEntity.setProperty("sentiment", replyColour); 
+    replyEntity.setProperty("replyColour", replyColourString); 
     replyEntity.setProperty("timestamp", timestamp);
     datastore.put(replyEntity);
     
@@ -39,7 +40,7 @@ public class AddReplyServlet extends CommentArtServlet {
     List<String> paints = new ArrayList<>();
     painter.getPaints().forEach(paint -> paints.add(Utility.colorToString(paint)));
 
-    String json = gson.toJson(new AddReplyResponse(Utility.colorToString(replyColour), paints)); 
+    String json = gson.toJson(new AddReplyResponse(replyColourString, paints)); 
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }

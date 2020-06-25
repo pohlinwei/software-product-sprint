@@ -7,7 +7,7 @@ const enableCommentForm = () => {
   const getCommentInputs = () => {
     const message = messageElement.value;
     const commenterName = nameElement.value;
-    return {name: commenterName, message: message};
+    return {commenterName: commenterName, message: message};
   }
   
   const commentsPlaceholder = document.getElementById('comments-placeholder');
@@ -25,7 +25,8 @@ const enableCommentForm = () => {
   }
   
   const commentSubmitButton = commentForm.querySelector('input[type="submit"]');
-  const commentRequestLink = commentForm.getAttribute('action');
+  const commentRequestLink = commentForm.querySelector('form[name="user-comments"]')
+        .getAttribute('action');
 
   enableForm(commentSubmitButton, commentRequestLink, getCommentInputs, onDataFetched);
 }

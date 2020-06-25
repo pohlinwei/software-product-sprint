@@ -25,10 +25,11 @@ public class Utility {
 
   /** Gets the colour that is mapped to the specified sentiment. */
   private static Color getColour(double sentiment) {
-    int MAX_COLOUR_VAL = 255;
-
     boolean isNegative = sentiment < 0;
-    int alphaVal = (int) Math.abs(sentiment) * MAX_COLOUR_VAL;
+
+    int MAX_COLOUR_VAL = 255;
+    // alphaVal should be >= 0.1 * MAX_COLOUR_VAL and <= MAX_COLOUR_VAL
+    int alphaVal = (int) ((Math.abs(sentiment) * 0.9 + 0.1) * MAX_COLOUR_VAL);
 
     if (isNegative) {
       return new Color(0, 0, MAX_COLOUR_VAL, alphaVal);
@@ -49,7 +50,7 @@ public class Utility {
     int blue = colour.getBlue();
     double alpha = (double) colour.getAlpha() / 255; // converts alpha value to be between 0 and 1
 
-    return String.format("rgba(%d, %d, %d, %.3f)", red, green, blue, alpha);
+    return String.format("rgba(%d,%d,%d,%.3f)", red, green, blue, alpha);
   }
 
   /**
@@ -59,7 +60,7 @@ public class Utility {
    */
   public static Color stringToColor(String colourStr) {
     String rgbaString = colourStr.substring(5, colourStr.length() - 1); 
-    String[] rgbaValues = rgbaString.split(", ");
+    String[] rgbaValues = rgbaString.split(",");
 
     int red = Integer.parseInt(rgbaValues[0]);
     int blue = Integer.parseInt(rgbaValues[1]);
