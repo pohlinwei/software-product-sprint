@@ -58,6 +58,10 @@ public class Palette {
   }
 
   private Color getPaint() {
+    if (otherColours.size() == 0) {
+      return mainColour;
+    }
+    
     double MAIN_WEIGHT = 0.5;
     double otherWeight = (1 - MAIN_WEIGHT) / otherColours.size();
 
