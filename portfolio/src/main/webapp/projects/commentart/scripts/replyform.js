@@ -33,7 +33,7 @@ function createReplyForm(commentId, repliesPlaceholder) {
 
       clearInput(responderNameElement);
       clearInput(replyMsgElement);
-      repliesPlaceholder.style.display === 'block';
+      repliesPlaceholder.style.display = 'block';
 
       updatePainting(replyResponse.paints); // TODO: implement `updatePainting`
     }
