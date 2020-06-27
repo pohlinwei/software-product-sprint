@@ -52,16 +52,10 @@ public final class FindMeetingQuery {
     // sort by start time
     Collections.sort(affectedTimeRanges, TimeRange.ORDER_BY_START);
 
-    // consider the possibility of a range that starts at START
-    TimeRange firstAffectedRange = affectedTimeRanges.get(0); // no error because there is at least one time range
-    TimeRange potentialFirstRange = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, 
-        firstAffectedRange.start(), /* inclusive= */ false);
-    if (potentialFirstRange.duration() >= minRequiredDuration) {
-      availableRanges.add(potentialFirstRange);
-    }
-    
-    // general case
-    TimeRange endsLastSoFar = affectedTimeRanges.get(0); 
+    // add dummy time range to account for an available time range which starts at START_OF_DAY
+    TimeRange dummyAffectedTimeRange = TimeRange.fromStartDuration(TimeRange.START_OF_DAY, 0);
+    affectedTimeRanges.add(0, dummyAffectedTimeRange);
+    TimeRange endsLastSoFar = affectedTimeRanges.get(1); // must exist since affectedTimeRanges was initially non-empty
     for (TimeRange currRange: affectedTimeRanges) {
       if (currRange.overlaps(endsLastSoFar)) {
         // choose the one that ends later
