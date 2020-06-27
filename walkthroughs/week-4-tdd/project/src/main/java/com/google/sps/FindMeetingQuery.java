@@ -55,17 +55,6 @@ public final class FindMeetingQuery {
     // add dummy time range to account for an available time range which starts at START_OF_DAY
     TimeRange dummyAffectedTimeRange = TimeRange.fromStartDuration(TimeRange.START_OF_DAY, 0);
     affectedTimeRanges.add(0, dummyAffectedTimeRange);
-
-    // find lastEndTime
-    int lastEndTime = Integer.MIN_VALUE;
-    for (TimeRange timeRange : affectedTimeRanges) {
-      if (timeRange.end() > lastEndTime) {
-        lastEndTime = timeRange.end();
-      }
-    }
-    // add dummy time range to account for an available time range which ends at END_OF_DAY
-    dummyAffectedTimeRange = TimeRange.fromStartEnd(lastEndTime, lastEndTime, /* inclusive= */ false);
-    affectedTimeRanges.add(dummyAffectedTimeRange);
     
     TimeRange endsLastSoFar = affectedTimeRanges.get(1); // must exist since affectedTimeRanges was initially non-empty
     for (TimeRange currRange: affectedTimeRanges) {
@@ -87,7 +76,15 @@ public final class FindMeetingQuery {
       }
       availableRanges.add(potentialRange);
     }
-    
+
+    // consider the possibility of a range that ends at END
+    int potentialLastStartTime = endsLastSoFar.end();
+    TimeRange potentialLastRange = TimeRange.fromStartEnd(
+        potentialLastStartTime, TimeRange.END_OF_DAY, true);
+    if (potentialLastRange.duration() >= minRequiredDuration) {
+      availableRanges.add(potentialLastRange);
+    }
+
     return availableRanges;
   }
 }
