@@ -44,7 +44,7 @@ public final class FindMeetingQuery {
     List<TimeRange> availableRanges = new ArrayList<>();
     if (minRequiredDuration > maxDuration) {
       return availableRanges;
-    } else if (affectedTimeRanges.size() == 0) {
+    } else if (affectedTimeRanges.isEmpty()) {
       availableRanges.add(TimeRange.WHOLE_DAY);
       return availableRanges;
     }
@@ -55,7 +55,7 @@ public final class FindMeetingQuery {
     // consider the possibility of a range that starts at START
     TimeRange firstAffectedRange = affectedTimeRanges.get(0); // no error because there is at least one time range
     TimeRange potentialFirstRange = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, 
-        firstAffectedRange.start(), false);
+        firstAffectedRange.start(), /* inclusive= */ false);
     if (potentialFirstRange.duration() >= minRequiredDuration) {
       availableRanges.add(potentialFirstRange);
     }
@@ -72,7 +72,8 @@ public final class FindMeetingQuery {
       // possibly found new available slot
       int rangeStartTime = endsLastSoFar.end();
       int rangeEndTime = currRange.start();
-      TimeRange potentialRange = TimeRange.fromStartEnd(rangeStartTime, rangeEndTime, false);
+      TimeRange potentialRange = TimeRange.fromStartEnd(rangeStartTime, rangeEndTime, 
+          /* inclusive= */ false);
       endsLastSoFar = currRange;
 
       if (potentialRange.duration() < minRequiredDuration) {
@@ -82,8 +83,7 @@ public final class FindMeetingQuery {
     }
 
     // consider the possibility of a range that ends at END
-    Collections.sort(affectedTimeRanges, TimeRange.ORDER_BY_END);
-    int potentialLastStartTime = affectedTimeRanges.get(affectedTimeRanges.size() - 1).end();
+    int potentialLastStartTime = endsLastSoFar.end();
     TimeRange potentialLastRange = TimeRange.fromStartEnd(
         potentialLastStartTime, TimeRange.END_OF_DAY, true);
     if (potentialLastRange.duration() >= minRequiredDuration) {
