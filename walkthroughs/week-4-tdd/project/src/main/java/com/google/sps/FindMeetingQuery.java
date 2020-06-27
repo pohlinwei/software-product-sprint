@@ -56,7 +56,7 @@ public final class FindMeetingQuery {
     TimeRange dummyAffectedTimeRange = TimeRange.fromStartDuration(TimeRange.START_OF_DAY, 0);
     affectedTimeRanges.add(0, dummyAffectedTimeRange);
     // add dummy time range to account for available time range which ends at END_OF_DAY
-    dummyAffectedTimeRange = TimeRange.fromStartDuration(TimeRange.END_OF_DAY, 0);
+    dummyAffectedTimeRange = TimeRange.fromStartDuration(TimeRange.START_OF_DAY, 0);
     affectedTimeRanges.add(dummyAffectedTimeRange);
     
     TimeRange endsLastSoFar = affectedTimeRanges.get(1); // must exist since affectedTimeRanges was initially non-empty
