@@ -17,12 +17,13 @@ package com.google.sps;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    List<String> relevantAttendees = new ArrayList<>();
+    Set<String> relevantAttendees = new HashSet<>();
     request.getAttendees().forEach(attendee -> relevantAttendees.add(attendee));
 
     List<TimeRange> affectedTimeRanges = new ArrayList<>(); 
@@ -39,6 +40,7 @@ public final class FindMeetingQuery {
     }
 
     long minRequiredDuration = request.getDuration();
+    // assuming that max duration is one day (as specified in {@code TimeRange})
     long maxDuration = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true).duration();
 
     List<TimeRange> availableRanges = new ArrayList<>();
