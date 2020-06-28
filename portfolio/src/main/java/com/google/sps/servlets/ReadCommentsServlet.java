@@ -42,8 +42,7 @@ public class ReadCommentsServlet extends CommentArtServlet {
 
   /** Gets all {@code Entity}s whose ancestor is associated with {@code commentKey}. */
   private Iterable<Entity> getReplyEntities(Key commentKey) {
-    Query repliesQuery = new Query("Reply").setAncestor(commentKey)
-        .addSort("timestamp", SortDirection.ASCENDING);
+    Query repliesQuery = new Query("Reply").setAncestor(commentKey);
     PreparedQuery repliesResults = datastore.prepare(repliesQuery);
     return repliesResults.asIterable();
   }

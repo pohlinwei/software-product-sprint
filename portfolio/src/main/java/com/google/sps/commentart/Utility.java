@@ -63,8 +63,8 @@ public class Utility {
     String[] rgbaValues = rgbaString.split(",");
 
     int red = Integer.parseInt(rgbaValues[0]);
-    int blue = Integer.parseInt(rgbaValues[1]);
-    int green = Integer.parseInt(rgbaValues[2]);
+    int green = Integer.parseInt(rgbaValues[1]);
+    int blue = Integer.parseInt(rgbaValues[2]);
     int alpha = (int) (Double.parseDouble(rgbaValues[3]) * 255); // converts alpha value to be between 0 and 255
 
     return new Color(red, green, blue, alpha);
